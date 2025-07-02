@@ -5,26 +5,57 @@
     <title>Register - PKL</title>
     <style>
         body {
-            background: #f4f6f8;
+            background: url('{{ asset('images/bgxcode3.png') }}') no-repeat center center fixed;
+            background-size: cover;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5); /* Transparansi hitam */
+            z-index: 0;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            z-index: 2;
+            background-color: white;       /* Background putih */
+            padding: 6px 12px;              /* Ruang dalam */
+            border-radius: 8px;             /* Sudut membulat */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Efek bayangan */
+        }
+
+        .logo img {
+            height: 100px;
+            object-fit: contain;
+            display: block;
+        }
+
+
         .card {
             background: #fff;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             width: 350px;
+            position: relative;
+            z-index: 1;
         }
         .card h2 {
             margin-bottom: 20px;
             color: #333;
         }
         input {
-            width: 100%;
+            width: 95%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
@@ -51,8 +82,12 @@
     </style>
 </head>
 <body>
+    <div class="logo">
+        <img src="/images/logoxcode.png" alt="Logo XCODE">
+    </div>
+
     <div class="card">
-        <h2>Daftar Akun PKL</h2>
+        <h2>Daftar Akun Magang</h2>
 
     {{-- ERROR VALIDATION --}}
     @if ($errors->any())

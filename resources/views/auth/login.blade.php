@@ -33,7 +33,7 @@
                 <button type="submit">KIRIM</button>
             <p class="register-link">
                 Belum punya akun?
-                <a href="/register">Daftar di sini</a>
+                <a href="{{ url('/register') }}">Daftar di sini</a>
             </p>
             
             </form>
