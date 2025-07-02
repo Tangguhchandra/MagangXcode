@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('/images/bg-login.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.login-left {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 60px; /* dikurangi dari 100px */
+    max-width: 500px; /* batasi lebar kiri */
+}
+
+.login-left h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    margin-top: -75px; /* untuk geser ke atas */
+    text-align: center; /* biar rata tengah */
+    border-bottom: 2px solid white;
+    display: block;
+    padding-bottom: 5px;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+form input {
+    padding: 10px; /* lebih kecil dari 14px */
+    margin-bottom: 25px;
+    border: none;
+    border-radius: 10px; /* lebih kecil dari 16px */
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 100%;
+}
+
+form input::placeholder {
+    color: #eee;
+}
+
+form button {
+    padding: 10px;
+    background: #c40000;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    width: 120px; /* lebih kecil dari 150px */
+    align-self: flex-start;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background: #a80000;
+}
+
+.login-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.login-right img {
+    max-width: 150%;
+    height: auto;
+}
+
+.alert-error {
+    background-color: #660000;
+    color: #fff0f0;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.register-link {
+    margin-top: 50px;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+}
+
+.register-link a {
+    color: #ff8080;
+    text-decoration: underline;
+}
+
+.register-link a:hover {
+    color: #ffffff;
+}
+
+form input::placeholder {
+    color: #ccc;
+    font-style: italic;
+    opacity: 0.8;
+}
