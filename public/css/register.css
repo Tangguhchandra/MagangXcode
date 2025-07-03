@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+/* Bagian KIRI - FORM LOGIN */
+.login-left {
+    flex: 1;
+    background-color: #ffffff; /* PUTIH solid */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 60px;
+    max-width: 500px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.login-left h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    text-align: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+/* FORM */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+form input {
+    padding: 10px;
+    margin-bottom: 25px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    background-color: #f4f4f4;
+    color: #333;
+    width: 100%;
+}
+
+form input::placeholder {
+    color: #888;
+}
+
+form button {
+    padding: 10px;
+    background: #c40000;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    width: 120px;
+    align-self: flex-start;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background: #a80000;
+}
+
+/* Bagian KANAN - BACKGROUND FOTO */
+.login-right {
+    flex: 1;
+    background: url('/images/bgxcode2.png') no-repeat center center;
+    background-size: cover;
+    height: 100%;
+}
+
+/* ERROR */
+.alert-error {
+    background-color: #660000;
+    color: #fff0f0;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Link ke Register */
+.login-link {
+    margin-top: 50px;
+    font-size: 14px;
+    text-align: center;
+    color: #333;
+}
+
+.login-link a {
+    color: #c40000;
+    text-decoration: underline;
+}
+
+.login-link a:hover {
+    color: #000;
+}
