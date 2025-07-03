@@ -6,8 +6,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('/images/bg-login.jpg') no-repeat center center fixed;
-    background-size: cover;
+
     height: 100vh;
     overflow: hidden;
 }
@@ -20,13 +19,15 @@ body {
 
 .login-left {
     flex: 1;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.868);
+    backdrop-filter: blur(100px);
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0 60px; /* dikurangi dari 100px */
     max-width: 500px; /* batasi lebar kiri */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.646);
 }
 
 .login-left h2 {
@@ -37,6 +38,8 @@ body {
     border-bottom: 2px solid white;
     display: block;
     padding-bottom: 5px;
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.3); /* bayangan putih */
+    
 
 }
 
@@ -46,9 +49,11 @@ form {
 }
 
 form label {
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.3); /* bayangan putih */
     margin-bottom: 6px;
     font-weight: bold;
     font-size: 17px;
+    
 }
 
 form input {
@@ -60,6 +65,8 @@ form input {
     background-color: rgba(255, 255, 255, 0.3);
     color: white;
     width: 100%;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.158);
+    
 }
 
 form input::placeholder {
@@ -78,6 +85,7 @@ form button {
     align-self: flex-start;
     cursor: pointer;
     transition: background 0.3s;
+    box-shadow: 0 8px 24px rgba(139, 0, 0, 0.532);
 }
 
 form button:hover {
@@ -86,16 +94,12 @@ form button:hover {
 
 .login-right {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.3);
+    background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1)), url('/images/bgxcode2.png') no-repeat center center;
+    background-size: cover;
+    height: 100%;  
 }
 
-.login-right img {
-    max-width: 130%;
-    height: auto;
-}
+
 
 .alert-error {
     background-color: #660000;
