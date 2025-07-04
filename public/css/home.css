@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+}
+
+.header {
+    position: absolute;
+    top: 5px;
+    left: 40px;
+    z-index: 10;
+}
+
+.logo {
+    width: 90px;
+    height: auto;
+}
+
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 60px;
+}
+
+
+.left-side img {
+    max-width: 500px;
+    width: 100%;
+    margin-left: -90px;  /* dorong gambar lebih ke kiri */
+    margin-top: 50px;
+}
+
+.right-side {
+    max-width: 500px;
+}
+
+.right-side h1 {
+    font-size: 48px;
+    color: #C62828;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.right-side p {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500; /* font lebih tebal sedikit */
+    line-height: 1.6;
+}
+
+.buttons {
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 30px;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 20px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-red {
+    background-color: #C62828;
+    color: white;
+}
+
+.btn-red:hover {
+    background-color: #b71c1c;
+}
+
+.btn-pink {
+    background-color: #EF9A9A;
+    color: white;
+}
+
+.btn-pink:hover {
+    background-color: #e57373;
+}
