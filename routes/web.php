@@ -10,5 +10,5 @@ Route::get('/login', [AuthController::class, 'showLoginForm']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/dashboard', function () {
-    return 'Selamat datang di dashboard!';
+    return view('dashboard');
 })->middleware('auth');
