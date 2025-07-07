@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\PendaftaranController;
 
 Route::get('/register', [AuthController::class, 'showRegisterForm']);
 Route::post('/register', [AuthController::class, 'register']);
@@ -31,4 +31,9 @@ Route::post('/logout', function () {
 
 Route::get('/', function () {
     return view('home'); // nanti kita buat file view-nya di bawah
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/pendaftaran', [PendaftaranController::class, 'create'])->name('pendaftaran.form');
+    Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
 });

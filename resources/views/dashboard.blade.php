@@ -40,7 +40,7 @@
       <span id="typed-output"></span>
     </h1>
     <p>Bergabunglah dengan kami untuk mengembangkan diri di dunia profesional.</p>
-    <a href="#daftar" class="cta-button">Isi Form Sekarang</a>
+    <a href="{{ route('pendaftaran.form') }}" class="cta-button">Isi Form Sekarang</a>
   </div>
 </section>
 
