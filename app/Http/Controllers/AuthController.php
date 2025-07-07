@@ -17,17 +17,18 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6' 
+            'password' => 'required|min:6|confirmed' // ← ini otomatis validasi dgn password_confirmation
         ]);
-
+    
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-
+    
         return redirect('/login')->with('success', 'Registrasi berhasil!');
     }
+    
 
     public function showLoginForm() {
         return view('auth.login');

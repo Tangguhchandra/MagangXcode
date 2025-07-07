@@ -5,113 +5,235 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    height: 100vh;
-    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
 }
 
 .container {
     display: flex;
-    height: 100%;
     width: 100%;
+    min-height: 100vh;
 }
 
-/* Bagian KIRI - FORM LOGIN */
-.login-left {
+/* Left Side - Hiring Section */
+.left-section {
     flex: 1;
-    background-color: #ffffff; /* PUTIH solid */
-    color: #333;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.poster-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 100vh;
+}
+
+/* Right Side - Registration Form */
+
+/* Floating label effect */
+.form-group {
+    position: relative;
+}
+
+
+.form-input:focus::placeholder {
+    color: #aaa;
+}
+
+.form-label-floating {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    transition: all 0.2s ease;
+    color: #999;
+    pointer-events: none;
+    background-color: white;
+    padding: 0 5px;
+}
+
+.form-input:focus + .form-label-floating,
+.form-input.filled + .form-label-floating {
+    top: -10px;
+    font-size: 12px;
+    color: #dc3545;
+}
+
+.right-section {
+    flex: 1;
+    background-color: white;
+    padding: 60px 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 60px;
-    max-width: 500px;
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+    position: relative;
 }
 
-.login-left h2 {
-    font-size: 32px;
-    margin-bottom: 40px;
-    text-align: center;
-    border-bottom: 2px solid #333;
-    padding-bottom: 5px;
+.logo {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-/* FORM */
-form {
-    display: flex;
-    flex-direction: column;
+.logo .bracket {
+    color: #dc3545;
 }
 
-form label {
-    margin-bottom: 6px;
-    font-weight: bold;
-    font-size: 17px;
-}
-
-form input {
-    padding: 10px;
-    margin-bottom: 25px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 14px;
-    background-color: #f4f4f4;
-    color: #333;
+.form-container {
+    max-width: 400px;
     width: 100%;
+    margin: 0 auto;
 }
 
-form input::placeholder {
-    color: #888;
-}
-
-form button {
-    padding: 10px;
-    background: #c40000;
-    color: white;
-    font-size: 14px;
+.form-title {
+    font-size: 36px;
     font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.form-subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    color: #dc3545;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0; /* abu default */
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #dc3545; /* merah saat klik input */
+    background-color: white;
+}
+
+.form-input.filled {
+    background-color: white;
+}
+
+.form-input.error {
+    border-color: red !important;
+}
+
+/* Floating label style */
+.form-label-floating {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    transition: all 0.2s ease;
+    color: #999;
+    pointer-events: none;
+    background-color: white;
+    padding: 0 5px;
+    opacity: 0;
+}
+
+.form-input:focus + .form-label-floating {
+    top: -10px;
+    font-size: 12px;
+    color: #dc3545;
+    opacity: 1;
+}
+
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    font-size: 18px;
+}
+
+.password-group {
+    position: relative;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #dc3545;
+    color: white;
     border: none;
     border-radius: 8px;
-    width: 120px;
-    align-self: flex-start;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
 }
 
-form button:hover {
-    background: #a80000;
+.submit-btn:hover {
+    background-color: #c82333;
 }
 
-/* Bagian KANAN - BACKGROUND FOTO */
-.login-right {
-    flex: 1;
-    background: url('/images/bgxcode2.png') no-repeat center center;
-    background-size: cover;
-    height: 100%;
-}
-
-/* ERROR */
-.alert-error {
-    background-color: #660000;
-    color: #fff0f0;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-}
-
-/* Link ke Register */
-.login-link {
-    margin-top: 50px;
-    font-size: 14px;
+.signin-link {
     text-align: center;
-    color: #333;
+    margin-top: 20px;
+    color: #666;
 }
 
-.login-link a {
-    color: #c40000;
+.signin-link a {
+    color: #dc3545;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signin-link a:hover {
     text-decoration: underline;
 }
 
-.login-link a:hover {
-    color: #000;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .poster-image {
+        min-height: 50vh;
+    }
+
+    .right-section {
+        padding: 40px 30px;
+    }
+
+    .logo {
+        top: 20px;
+        right: 20px;
+        font-size: 16px;
+    }
+
+    .form-title {
+        font-size: 28px;
+    }
 }
