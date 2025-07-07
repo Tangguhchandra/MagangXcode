@@ -3,18 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PendaftaranController;
 
-// Welcome page (home.blade.php)
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect('/dashboard');
-    }
-    return view('home');
-})->name('welcome');
-
-
-// Register
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::get('/register', [AuthController::class, 'showRegisterForm']);
 Route::post('/register', [AuthController::class, 'register']);
 
 // Login
@@ -31,3 +22,12 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/login');
 })->name('logout');
+
+Route::get('/', function () {
+    return view('home'); // nanti kita buat file view-nya di bawah
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/pendaftaran', [PendaftaranController::class, 'create'])->name('pendaftaran.form');
+    Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
+});
