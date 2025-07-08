@@ -13,24 +13,42 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+
 </head>
 <body>
 
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">Xcode</div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#tentang">Tentang</a></li>
-            <li><a href="#program">Program</a></li>
-            <li><a href="#kontak">Kontak</a></li>
-            <li><a href="#">Profil</a></li>
-        </ul>
+    <!-- Kiri: Logo -->
+    <div class="logo">Xcode</div>
+
+    <!-- Tengah: Menu Navigasi -->
+    <ul class="nav-links" style="position: absolute; left: 50%; transform: translateX(-50%);">
+        <li><a href="#">Home</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#program">Program</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+    </ul>
+
+    <!-- Kanan: Ikon Profil & Logout -->
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <!-- Profil -->
+        <a href="{{ route('profil') }}" class="profil-icon" title="Profil">
+          <i class="fas fa-user-circle fa-2x"></i>
+        </a>
+
+        <!-- Logout -->
         <form action="{{ route('logout') }}" method="POST" class="logout-form">
             @csrf
-            <button type="submit" class="logout-btn">Logout</button>
+            <button type="submit" class="logout-btn" title="Logout">
+                <i class="fas fa-sign-out-alt fa-lg"></i>
+            </button>
         </form>
-    </nav>
+    </div>
+</nav>
 
     <!-- Hero Section -->
 <section class="hero">
