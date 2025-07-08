@@ -17,6 +17,7 @@ class PendaftaranController extends Controller
     {
         $request->validate([
             'nama' => 'required|string',
+            'email' => 'required|email|regex:/@gmail\.com$/i',
             'jenis_kelamin' => 'required',
             'instansi' => 'required',
             'divisi' => 'required',
@@ -34,6 +35,7 @@ class PendaftaranController extends Controller
         Pendaftaran::create([
             'user_id' => Auth::id(),
             'nama' => $request->nama,
+            'email' => $request->email, // ✅ Simpan email
             'jenis_kelamin' => $request->jenis_kelamin,
             'instansi' => $request->instansi,
             'divisi' => $request->divisi,

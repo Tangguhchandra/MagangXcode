@@ -5,7 +5,8 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PendaftaranController;
 
-Route::get('/register', [AuthController::class, 'showRegisterForm']);
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+
 Route::post('/register', [AuthController::class, 'register']);
 
 // Login
