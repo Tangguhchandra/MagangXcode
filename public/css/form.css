@@ -27,6 +27,7 @@ label {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="file"],
 select {
     width: 100%;
@@ -35,6 +36,27 @@ select {
     border-radius: 8px;
     margin-bottom: 10px;
 }
+
+
+    .btn-back {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: background-color 0.3s;
+    }
+
+    .btn-back:hover {
+        background-color: #c82333;
+    }
+
+
 
 button[type="submit"] {
     display: block;

@@ -31,9 +31,11 @@
                         <input type="text" class="form-input" id="fullName" name="name" placeholder="Nama Lengkap" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group"> 
                         <input type="email" class="form-input" id="email" name="email" placeholder="e-Mail" required>
+                        <small style="color: red; display: block; margin-top: 5px;">Gunakan email resmi!</small>
                     </div>
+
 
                     <div class="form-group password-group">
                         <input type="password" class="form-input" id="password" name="password" placeholder="Password" required>
