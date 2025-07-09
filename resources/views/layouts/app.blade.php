@@ -44,10 +44,10 @@
 
     <!-- Tengah: Menu Navigasi -->
     <ul class="nav-links" style="position: absolute; left: 50%; transform: translateX(-50%);">
-        <li><a href="#">Home</a></li>
-        <li><a href="#tentang">Tentang</a></li>
-        <li><a href="#program">Program</a></li>
-        <li><a href="#kontak">Kontak</a></li>
+    <li><a href="{{ url('/dashboard') }}">Home</a></li>
+    <li><a href="{{ url('/dashboard#tentang') }}">Tentang</a></li>
+    <li><a href="{{ url('/dashboard#program') }}">Program</a></li>
+    <li><a href="{{ url('/dashboard#kontak') }}">Kontak</a></li>
     </ul>
 
     <!-- Kanan: Ikon Profil & Logout -->

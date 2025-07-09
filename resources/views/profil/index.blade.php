@@ -43,48 +43,53 @@
         Status Pendaftaran Magang
     </h3>
 
-    @if ($pendaftaran)
+    @if ($pendaftaran->count())
+    @foreach ($pendaftaran as $pendaftaran)
         @php
             $statusColor = match($pendaftaran->status) {
                 'pending' => 'bg-yellow-100 text-yellow-800',
                 'diterima' => 'bg-green-100 text-green-800',
                 'ditolak' => 'bg-red-100 text-red-800',
+                default => 'bg-gray-100 text-gray-800',
             };
         @endphp
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700" data-aos="fade-up" data-aos-delay="200">
-            <div><strong>Nama:</strong> {{ $pendaftaran->nama }}</div>
-            <div><strong>Instansi:</strong> {{ $pendaftaran->instansi }}</div>
-            <div><strong>Divisi:</strong> {{ $pendaftaran->divisi }}</div>
-            <div>
-                <strong>Status:</strong>
-                <span class="px-3 py-1 rounded-full text-sm font-medium {{ $statusColor }}">
-                    {{ ucfirst($pendaftaran->status) }}
-                </span>
-            </div>
+        <div class="mb-6 p-4 rounded-xl shadow-lg border border-gray-200" data-aos="fade-up" data-aos-delay="200">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+                <div><strong>Nama:</strong> {{ $pendaftaran->nama }}</div>
+                <div><strong>Instansi:</strong> {{ $pendaftaran->instansi }}</div>
+                <div><strong>Divisi:</strong> {{ $pendaftaran->divisi }}</div>
+                <div>
+                    <strong>Status:</strong>
+                    <span class="px-3 py-1 rounded-full text-sm font-medium {{ $statusColor }}">
+                        {{ ucfirst($pendaftaran->status) }}
+                    </span>
+                </div>
+                <div>
+                    <strong>CV:</strong>
+                    <a href="{{ asset('storage/' . $pendaftaran->cv) }}" target="_blank"
+                       class="text-blue-600 underline hover:text-blue-800 transition-all duration-200">
+                        📄 Lihat CV
+                    </a>
+                </div>
 
-            <div>
-                <strong>CV:</strong>
-                <a href="{{ asset('storage/' . $pendaftaran->cv) }}"
-                   target="_blank"
-                   class="text-blue-600 underline hover:text-blue-800 transition-all duration-200">
-                   📄 Lihat CV
-                </a>
+                @if ($pendaftaran->portofolio)
+                    <div>
+                        <strong>Portofolio:</strong>
+                        <a href="{{ asset('storage/' . $pendaftaran->portofolio) }}" target="_blank"
+                           class="text-blue-600 underline hover:text-blue-800 transition-all duration-200">
+                            🧾 Lihat Portofolio
+                        </a>
+                    </div>
+                @endif
             </div>
-
-            @if ($pendaftaran->portofolio)
-            <div>
-                <strong>Portofolio:</strong>
-                <a href="{{ asset('storage/' . $pendaftaran->portofolio) }}"
-                   target="_blank"
-                   class="text-blue-600 underline hover:text-blue-800 transition-all duration-200">
-                   🧾 Lihat Portofolio
-                </a>
-            </div>
-            @endif
         </div>
-    @else
-        <div class="text-gray-500 italic" data-aos="fade-up">Kamu belum melakukan pendaftaran magang.</div>
-    @endif
+    @endforeach
+@else
+    <div class="text-gray-500 italic" data-aos="fade-up">
+        Kamu belum melakukan pendaftaran magang.
+    </div>
+@endif
+
 </div>
 @endsection

@@ -10,7 +10,7 @@ class ProfilController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $pendaftaran = Pendaftaran::where('user_id', $user->id)->first();
+        $pendaftaran = Pendaftaran::where('user_id', $user->id)->get();
 
         return view('profil.index', compact('user', 'pendaftaran'));
     }
