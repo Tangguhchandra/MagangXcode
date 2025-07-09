@@ -1,8 +1,6 @@
 <x-filament::page>
     <div
-    class="relative w-full min-h-screen bg-cover bg-center px-4 py-0 rounded-3xl overflow-hidden"
-    style="background-image: url('{{ asset('images/Pemandangan.jpg') }}');"
-    >
+    class="relative w-full min-h-screen bg-cover bg-center px-4 py-0 rounded-3xl overflow-hidden">
         <!-- Overlay gelap -->
         <div class="absolute inset-0 bg-black/40 z-0"></div>
 

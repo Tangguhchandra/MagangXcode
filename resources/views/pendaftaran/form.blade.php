@@ -14,6 +14,7 @@
             <div class="alert-success">{{ session('success') }}</div>
         @endif
 
+        
         <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
@@ -21,7 +22,7 @@
             <input type="text" id="nama" name="nama" required>
 
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" required pattern="[a-zA-Z0-9._%+-]+@gmail\.com" title="Gunakan email @gmail.com saja" readonly>
+            <input type="email" id="email" name="email" required pattern="[a-zA-Z0-9._%+-]+@gmail\.com" title="Gunakan email @gmail.com saja">
 
             <label for="jenis_kelamin">Jenis Kelamin</label>
             <select name="jenis_kelamin" id="jenis_kelamin" required>
