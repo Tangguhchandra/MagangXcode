@@ -9,7 +9,7 @@ class Dashboard extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-home';
 
-    protected static string $view = 'filament.pages.dashboard';
+    protected static string $view = 'filament.pages.dashboardsec';
 
     // Tambahkan label navigasi agar tidak error
     protected static ?string $navigationLabel = 'Dashboard';

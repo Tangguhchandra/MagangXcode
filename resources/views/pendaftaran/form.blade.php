@@ -54,7 +54,7 @@
             <input type="file" name="portofolio" id="portofolio" accept=".pdf,.docx,.pptx">
 
             <button type="submit">Kirim Pendaftaran</button>
-
+            
             <a href="{{ url('/dashboard') }}" class="btn-back">← Kembali ke Beranda</a>
 
         </form>
