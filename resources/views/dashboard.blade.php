@@ -67,9 +67,10 @@
     <!-- Tentang -->
     <section id="tentang" class="section-light">
         <h2>Tentang Kami</h2>
-        <!-- belum ada aset -->
-        <img src="" alt=""> 
-        <p>X-code atau dikenal juga Yogyafree lahir tanggal 5 Juni 2004 di Yogyakarta sebagai media pembelajaran hacking & keamanan komputer yang kemudian di bawah PT. Kode Keamanan Indonesia lalu akhirnya saat ini di bawah PT. Teknologi Server Indonesia.</p>
+        <div class="konten-tentang">
+          <img src="{{ asset('images/hero2.HEIC') }}" alt="" width="40%"> 
+          <p>X-code atau dikenal juga Yogyafree lahir tanggal 5 Juni 2004 di Yogyakarta sebagai media pembelajaran hacking & keamanan komputer yang kemudian di bawah PT. Kode Keamanan Indonesia lalu akhirnya saat ini di bawah PT. Teknologi Server Indonesia.</p>
+        </div>
     </section>
 
     <section id="program" class="section-dark">
@@ -173,7 +174,7 @@
       </a>
 
       <!-- WhatsApp Card -->
-      <a href="https://wa.me/6281234567890" class="card whatsapp-card">
+      <a href="https://wa.me/62895420754477" class="card whatsapp-card">
         <i class="fas fa-phone icon whatsapp-icon"></i>
         <div class="card-text">
           <h4>WhatsApp</h4>
@@ -182,6 +183,11 @@
       </a>
     </div>
   </section>
+
+  <footer class="footer">
+    <p>© 2025 XCODE Internships. All rights reserved.</p>
+  </footer>
+
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
