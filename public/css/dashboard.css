@@ -132,7 +132,7 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambah bayangan biar pop-up */
 /* HERO */
 .hero {
   /* belum ada aset */
-  background: url('/images/hero3.HEIC') no-repeat center center/cover; 
+  background: url('/images/4.jpeg') no-repeat center center/cover; 
   height: 100vh;
   display: flex;
   justify-content: center;
