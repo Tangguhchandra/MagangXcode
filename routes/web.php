@@ -36,15 +36,3 @@ Route::middleware('auth')->group(function () {
     })->name('logout');
 });
 // Logout
-
-Route::get(uri: '/test-email', action: function () {
-    try {
-        Mail::raw('Test email', function ($message) {
-            $message->to('attalasatya@gmail.com')
-                   ->subject('Test Email');
-        });
-        return 'Email sent successfully!';
-    } catch (\Exception $e) {
-        return 'Error: ' . $e->getMessage();
-    }
-});
