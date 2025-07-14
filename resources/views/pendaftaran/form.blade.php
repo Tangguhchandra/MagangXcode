@@ -31,7 +31,12 @@
             <input type="text" id="instansi" name="instansi" required>
 
             <label for="divisi">Divisi</label>
-            <input type="text" id="divisi" name="divisi" required>
+            <select type="text" id="divisi" name="divisi" required>
+                <option value="">-- Pilih Divisi --</option>
+                <option value="Pengembangan Web">Pengembangan Web</option>
+                <option value="UI/UX Design">UI/UX Design</option>
+                <option value="Cyber Security">Cyber Security</option>
+            </select>
 
             <label for="foto">Foto Profesional</label>
             <input type="file" name="foto" id="foto" accept="image/*" required>

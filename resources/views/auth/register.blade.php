@@ -19,7 +19,6 @@
             <div class="logo">
                 <img src="{{ asset('images/logoxcode.png') }}" alt="Logo XCODE" style="width: 100px;">
             </div>
-
             <div class="form-container">
                 <h2 class="form-title">Daftar</h2>
                 <p class="form-subtitle">Silakan daftar akun untuk melanjutkan.</p>
