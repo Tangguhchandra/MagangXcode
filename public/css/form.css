@@ -17,32 +17,48 @@ h1 {
     text-align: center;
     margin-bottom: 30px;
     color: #e63946;
+    font-size: 24px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
 }
 
 label {
-    display: block;
     margin-bottom: 8px;
     font-weight: 600;
     margin-top: 20px;
+    font-size: 14px;
 }
 
 input[type="text"],
+input[type="email"],
 input[type="file"],
 select {
     width: 100%;
-    padding: 10px 12px;
+    padding: 12px 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
     margin-bottom: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    appearance: none;
+    background-color: #fff;
 }
 
+select {
+    height: auto; /* biar sejajar dengan input lainnya */
+}
+
+/* Style tombol submit */
 button[type="submit"] {
     display: block;
     width: 100%;
     background-color: #e63946;
     color: white;
     border: none;
-    padding: 12px;
+    padding: 14px;
     border-radius: 8px;
     font-size: 16px;
     margin-top: 20px;
@@ -54,10 +70,30 @@ button[type="submit"]:hover {
     background-color: #c62828;
 }
 
+/* Style alert sukses */
 .alert-success {
     background-color: #dff0d8;
     color: #e63946;
     padding: 12px;
     border-radius: 5px;
     margin-bottom: 15px;
+}
+
+/* Tombol kembali ke beranda */
+.btn-back {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+}
+
+.btn-back:hover {
+    background-color: #c82333;
 }

@@ -25,10 +25,18 @@ class PendaftaranResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('nama')
                     ->disabled(),
+
+                Forms\Components\TextInput::make('email')
+                    ->label('Email')
+                    ->email()
+                    ->disabled(),
+
                 Forms\Components\TextInput::make('jenis_kelamin')
                     ->disabled(),
+
                 Forms\Components\TextInput::make('instansi')
                     ->disabled(),
+
                 Forms\Components\TextInput::make('divisi')
                     ->disabled(),
 
@@ -37,13 +45,16 @@ class PendaftaranResource extends Resource
                     ->image()
                     ->disk('public')
                     ->directory('pendaftaran/foto')
+                    ->visibility('public')
                     ->disabled()
                     ->downloadable(),
+
 
                 Forms\Components\FileUpload::make('cv')
                     ->label('CV')
                     ->disk('public')
                     ->directory('pendaftaran/cv')
+                    ->visibility('public')
                     ->disabled()
                     ->downloadable(),
 
@@ -51,7 +62,12 @@ class PendaftaranResource extends Resource
                     ->label('Portofolio')
                     ->disk('public')
                     ->directory('pendaftaran/portofolio')
-                    ->disabled()
+                    ->acceptedFileTypes([
+                        'application/pdf',
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                    ])
+                    ->openable()
                     ->downloadable(),
 
                 Forms\Components\Select::make('status')
@@ -70,6 +86,7 @@ class PendaftaranResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('email')->label('Email')->searchable(),
                 Tables\Columns\TextColumn::make('jenis_kelamin'),
                 Tables\Columns\TextColumn::make('instansi'),
                 Tables\Columns\TextColumn::make('divisi'),

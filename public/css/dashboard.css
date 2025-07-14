@@ -53,6 +53,43 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambah bayangan biar pop-up */
   transform: scale(1.05);
 }
 
+.navbar .fa-user-circle,
+.navbar .fa-sign-out-alt {
+  transition: 0.3s ease;
+}
+
+.navbar .fa-user-circle:hover,
+.navbar .fa-sign-out-alt:hover {
+  color: #e63946;
+  transform: scale(1.1);
+}
+
+/* Hover untuk ikon profil */
+.navbar a i.fa-user-circle {
+  transition: 0.3s ease;
+}
+
+.navbar a i {
+  transition: 0.3s ease;
+}
+
+.navbar a:hover i {
+  color: #e63946;
+  transform: scale(1.1);
+}
+
+.profil-icon i {
+    color: white;
+    transition: 0.3s ease;
+}
+
+.profil-icon i:hover {
+    color: #e63946;
+    transform: scale(1.1);
+}
+
+
+
 /* Logout */
 .logout-form {
   margin-left: 20px;
@@ -94,7 +131,8 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambah bayangan biar pop-up */
 
 /* HERO */
 .hero {
-  background: url('/images/bg-login.jpg') no-repeat center center/cover;
+  /* belum ada aset */
+  background: url('/images/hero3.HEIC') no-repeat center center/cover; 
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -153,6 +191,12 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambah bayangan biar pop-up */
   text-align: center;
 }
 
+.section-light p {
+  width: 700px;
+  text-align: left;
+  font-size: large;
+}
+
 .section-light {
   background-color: #fff;
 }
@@ -165,6 +209,16 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambah bayangan biar pop-up */
   font-size: 32px;
   margin-bottom: 26px;
   color: #222;
+}
+
+.konten-tentang {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px; /* Diperbesar dari 1000px */
+  margin: 0 auto;
+  margin-top: 70px;
 }
 
 /* PROGRAM CARD SLIDER */
@@ -236,8 +290,8 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambah bayangan biar pop-up */
 /* IMAGE + TITLE */
 .image-section {
   flex: 1;
-  text-align: center;
 }
+
 
 .image-section h3 {
   font-size: 22px;
@@ -262,6 +316,11 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambah bayangan biar pop-up */
   text-align: left;
 }
 
+.desc-section p {
+  width: 400px;
+  margin-right: 20px;
+}
+
 /* SWIPER ARROWS KECIL DI POJOK */
 .swiper-controls {
   display: flex;
@@ -282,6 +341,98 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambah bayangan biar pop-up */
   transition: 0.3s;
 }
 
+/* Contact 2 */
+
+.contact-section {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #fff;
+  height: 350px;
+}
+
+.contact-section h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.contact-section p {
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.contact-cards {
+  display: flex;
+  margin-top: 50px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 20px 30px;
+  width: 320px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.icon {
+  font-size: 28px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-card {
+  background-color: #e5f0ff;
+}
+
+.email-icon {
+  color: #d90429;
+}
+
+.whatsapp-card {
+  background-color: #d5ffe3;
+}
+
+.whatsapp-icon {
+  color: #00b86b;
+}
+
+.card-text h4 {
+  text-align: left;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+
+.card-text p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  color: black;
+  font-size: 14px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+}
 
 
 /* RESPONSIVE */
