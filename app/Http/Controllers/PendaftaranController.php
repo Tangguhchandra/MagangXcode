@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PendaftarRequest;
 use App\Models\Pendaftaran;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PendaftaranController extends Controller
