@@ -36,6 +36,10 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambah bayangan biar pop-up */
   color: #fff;
 }
 
+.logo span {
+  color: #e63946; /* Warna merah untuk huruf X */
+}
+
 .nav-links {
   list-style: none;
   display: flex;
@@ -99,7 +103,7 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tambah bayangan biar pop-up */
 .logout-btn {
   background-color: transparent;
   color: #fff;
-  border: 2px solid #e63946;
+  border: 2px solid # ;
   padding: 8px 15px;
   border-radius: 8px;
   font-size: 14px;

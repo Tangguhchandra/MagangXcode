@@ -25,7 +25,7 @@
     <!-- Navbar -->
     <nav class="navbar">
     <!-- Kiri: Logo -->
-    <div class="logo">MagangXcode</div>
+    <div class="logo">Magang<span>X</span>code</div>
 
     <!-- Tengah: Menu Navigasi -->
     <ul class="nav-links" style="position: absolute; left: 50%; transform: translateX(-50%);">
