@@ -2,20 +2,23 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Pages\Page;
+use Filament\Pages\Dashboard as BaseDashboard;
 use App\Models\Pendaftaran;
 
-class Dashboard extends Page
+class Dashboard extends BaseDashboard
 {
     protected static ?string $navigationIcon = 'heroicon-o-home';
 
     protected static string $view = 'filament.pages.dashboardsec';
 
     // Tambahkan label navigasi agar tidak error
-    protected static ?string $navigationLabel = 'Dashboard';
+    protected static ?string $navigationLabel = 'Dashboard Admin';
 
-    // Kosongkan title agar tidak muncul di atas
-    protected static ?string $title = '';
+    // Custom title untuk admin dashboard
+    protected static ?string $title = 'Dashboard Admin';
+
+    // Add custom route name to avoid conflicts
+    protected static ?string $slug = 'admin-dashboard';
 
     public $total;
     public $diterima;

@@ -43,8 +43,9 @@ class PendaftaranController extends Controller
             'cv' => $cv,
             'portofolio' => $portofolio,
         ]);
-
         return view('pendaftaran.success');
 
     }
+
+  
 }

@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\PelamarResource\Pages;
 
-use App\Filament\Resources\PelamarResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-
+use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
 class EditPelamar extends EditRecord
 {
-    protected static string $resource = PelamarResource::class;
+    protected static string $resource = EditPelamar::class;
 
     protected function getHeaderActions(): array
     {

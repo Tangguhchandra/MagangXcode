@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulir Pendaftaran</title>
     <link rel="stylesheet" href="{{ asset('css/form.css') }}"> <!-- CSS terhubung di sini -->
 </head>
+
 <body>
     <div class="form-container">
         <h1>Formulir Pendaftaran Magang</h1>
 
-        @if(session('success'))
+        @if (session('success'))
             <div class="alert-success">{{ session('success') }}</div>
         @endif
 
-        
+
         <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
@@ -22,7 +24,8 @@
             <input type="text" id="nama" name="nama" required>
 
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required pattern="[a-zA-Z0-9._%+-]+@gmail\.com" title="Gunakan email @gmail.com saja">
+            <input type="email" id="email" name="email" required pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
+                title="Gunakan email @gmail.com saja">
 
             <label for="jenis_kelamin">Jenis Kelamin</label>
             <select name="jenis_kelamin" id="jenis_kelamin" required>
@@ -55,10 +58,11 @@
             <input type="file" name="portofolio" id="portofolio" accept=".pdf,.docx,.pptx">
 
             <button type="submit">Kirim Pendaftaran</button>
-            
-            <a href="{{ url('/dashboard') }}" class="btn-back">← Kembali ke Beranda</a>
+
+            <a href="{{ route('user.dashboard') }}" class="btn-back">← Kembali ke Beranda</a>
 
         </form>
     </div>
 </body>
+
 </html>
