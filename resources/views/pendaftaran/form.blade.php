@@ -45,6 +45,9 @@
                 <option value="Network Engineer">Network Engineer</option>
             </select>
 
+            <label for="durasi_magang">Durasi Magang (dalam bulan)</label>
+            <input type="number" class="form-input" id="durasi_magang" name="durasi_magang" placeholder="Contoh: 3" min="1" required>
+
             <label for="foto">Foto Profesional</label>
             <input type="file" name="foto" id="foto" accept="image/*" required>
 

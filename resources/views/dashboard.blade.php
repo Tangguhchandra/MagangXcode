@@ -90,7 +90,7 @@
     <section id="tentang" class="section-light">
         <h2>Tentang Kami</h2>
         <div class="konten-tentang">
-          <img src="{{ asset('images/hero2.png') }}" alt="" width="40%"> 
+          <img src="{{ asset('images/2.jpeg') }}" alt="" width="40%"> 
           <p>X-code atau dikenal juga Yogyafree lahir tanggal 5 Juni 2004 di Yogyakarta sebagai media pembelajaran hacking & keamanan komputer yang kemudian di bawah PT. Kode Keamanan Indonesia lalu akhirnya saat ini di bawah PT. Teknologi Server Indonesia.</p>
         </div>
     </section>
