@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\AdminDashboardController;
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -33,3 +34,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('profil');
+
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
+Route::patch('/admin/update-status/{id}', [App\Http\Controllers\AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
+
