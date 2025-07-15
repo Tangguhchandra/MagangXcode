@@ -5,17 +5,17 @@
 
     <!-- Tengah: Menu Navigasi -->
     <ul class="nav-links" style="position: absolute; left: 50%; transform: translateX(-50%);">
-        <li><a href="/dashboard">Home</a></li>
-        <li><a href="#tentang">Tentang</a></li>
-        <li><a href="#program">Program</a></li>
-        <li><a href="#kontak">Kontak</a></li>
+      <li><a href="{{ route('user.dashboard') }}" class="{{ request()->routeIs('user.dashboard') || request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+      <li><a href="#tentang" class="{{ request()->is('*tentang*') ? 'active' : '' }}">Tentang</a></li>
+      <li><a href="#program" class="{{ request()->is('*program*') ? 'active' : '' }}">Program</a></li>
+      <li><a href="#kontak" class="{{ request()->is('*kontak*') ? 'active' : '' }}">Kontak</a></li>
     </ul>
 
     <!-- Kanan: Ikon Profil & Logout -->
     <div style="display: flex; align-items: center; gap: 20px;">
         <!-- Profil -->
-        <a href="{{ route('profil') }}" class="profil-icon" title="Profil">
-          <i class="fas fa-user-circle fa-2x"></i>
+    <a href="{{ route('profil') }}" class="profil-icon {{ request()->routeIs('profil') ? 'active' : '' }}" title="Profil">
+            <i class="fas fa-user-circle fa-2x"></i>
         </a>
 
         <!-- Logout -->
@@ -36,7 +36,7 @@
   <div class="side-menu" id="sideMenu">
     <span class="close-btn" id="closeBtn">&times;</span>
     <ul>
-      <li><a href="/dashboard">Home</a></li>
+      <li><a href="{{ route('user.dashboard') }}" class="{{ request()->routeIs('user.dashboard') || request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
       <li><a href="#tentang">Tentang</a></li>
       <li><a href="#program">Program</a></li>
       <li><a href="#kontak">Kontak</a></li>
