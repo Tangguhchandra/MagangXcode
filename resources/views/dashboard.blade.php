@@ -50,6 +50,28 @@
             </button>
         </form>
     </div>
+    <div class="mobile-only">
+    <div class="hamburger" id="hamburger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="side-menu" id="sideMenu">
+    <span class="close-btn" id="closeBtn">&times;</span>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#program">Program</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+      <li><a href="{{ route('profil') }}">Profil</a></li>
+      <li><a href="{{ route('logout') }}">Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+    </div>
+    </div>
 </nav>
 
     <!-- Hero Section -->
@@ -231,6 +253,26 @@
     }
 
     typeWriter();
+
+    const hamburger = document.getElementById('hamburger');
+    const sideMenu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('closeBtn');
+
+    hamburger.addEventListener('click', () => {
+      sideMenu.classList.add('open');
+      overlay.classList.add('show');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      sideMenu.classList.remove('open');
+      overlay.classList.remove('show');
+    });
+
+    overlay.addEventListener('click', () => {
+      sideMenu.classList.remove('open');
+      overlay.classList.remove('show');
+    });
 });
 </script>
 </body>
