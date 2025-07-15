@@ -1,67 +1,131 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulir Pendaftaran</title>
-    <link rel="stylesheet" href="{{ asset('css/form.css') }}"> <!-- CSS terhubung di sini -->
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 </head>
+
 <body>
     <div class="form-container">
         <h1>Formulir Pendaftaran Magang</h1>
 
-        @if(session('success'))
+        @if (session('success'))
             <div class="alert-success">{{ session('success') }}</div>
         @endif
 
-        
+        @if ($errors->any())
+            <div class="alert-error">
+                <h4>Terdapat kesalahan pada form:</h4>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <label for="nama">Nama Lengkap</label>
-            <input type="text" id="nama" name="nama" required>
+            <div class="form-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" value="{{ old('nama') }}" required>
+                @error('nama')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required pattern="[a-zA-Z0-9._%+-]+@gmail\.com" title="Gunakan email @gmail.com saja">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                    pattern="[a-zA-Z0-9._%+-]+@gmail\.com" title="Gunakan email @gmail.com saja">
+                @error('email')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <label for="jenis_kelamin">Jenis Kelamin</label>
-            <select name="jenis_kelamin" id="jenis_kelamin" required>
-                <option value="">-- Pilih --</option>
-                <option value="Laki-laki">Laki-laki</option>
-                <option value="Perempuan">Perempuan</option>
-            </select>
+            <div class="form-group">
+                <label for="jenis_kelamin">Jenis Kelamin</label>
+                <select name="jenis_kelamin" id="jenis_kelamin" required>
+                    <option value="">-- Pilih --</option>
+                    <option value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki
+                    </option>
+                    <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan
+                    </option>
+                </select>
+                @error('jenis_kelamin')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <label for="instansi">Instansi</label>
-            <input type="text" id="instansi" name="instansi" required>
+            <div class="form-group">
+                <label for="instansi">Instansi</label>
+                <input type="text" id="instansi" name="instansi" value="{{ old('instansi') }}" required>
+                @error('instansi')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <label for="divisi">Divisi</label>
-            <select name="divisi" id="divisi" required>
-                <option value="">-- Pilih Divisi --</option>
-                <option value="Cyber Security Consultant">Cyber Security Consultant</option>
-                <option value="Programmer (Front End / Back end)">Programmer (Front End / Back end)</option>
-                <option value="Public Relation">Public Relation</option>
-                <option value="Designer">Designer</option>
-                <option value="IT Network & Hardware">IT Network & Hardware</option>
-                <option value="Network Engineer">Network Engineer</option>
-            </select>
+            <div class="form-group">
+                <label for="divisi">Divisi</label>
+                <select name="divisi" id="divisi" required>
+                    <option value="">-- Pilih Divisi --</option>
+                    <option value="Cyber Security Consultant"
+                        {{ old('divisi') == 'Cyber Security Consultant' ? 'selected' : '' }}>Cyber Security Consultant
+                    </option>
+                    <option value="Programmer (Front End / Back end)"
+                        {{ old('divisi') == 'Programmer (Front End / Back end)' ? 'selected' : '' }}>Programmer (Front
+                        End / Back end)</option>
+                    <option value="Public Relation" {{ old('divisi') == 'Public Relation' ? 'selected' : '' }}>Public
+                        Relation</option>
+                    <option value="Designer" {{ old('divisi') == 'Designer' ? 'selected' : '' }}>Designer</option>
+                    <option value="IT Network & Hardware"
+                        {{ old('divisi') == 'IT Network & Hardware' ? 'selected' : '' }}>IT Network & Hardware</option>
+                    <option value="Network Engineer" {{ old('divisi') == 'Network Engineer' ? 'selected' : '' }}>
+                        Network Engineer</option>
+                </select>
+                @error('divisi')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <label for="durasi_magang">Durasi Magang (dalam bulan)</label>
-            <input type="number" class="form-input" id="durasi_magang" name="durasi_magang" placeholder="Contoh: 3" min="1" required>
+            <div class="form-group">
+                <label for="foto">Foto Profesional</label>
+                <input type="file" name="foto" id="foto" accept="image/*" required>
+                <small class="file-info">Format: JPG, PNG (Max: 2MB)</small>
+                @error('foto')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <label for="foto">Foto Profesional</label>
-            <input type="file" name="foto" id="foto" accept="image/*" required>
+            <div class="form-group">
+                <label for="cv">CV (PDF)</label>
+                <input type="file" name="cv" id="cv" accept="application/pdf" required>
+                <small class="file-info">Format: PDF (Max: 2MB)</small>
+                @error('cv')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <label for="cv">CV (PDF)</label>
-            <input type="file" name="cv" id="cv" accept="application/pdf" required>
+            <div class="form-group">
+                <label for="portofolio">Portofolio (Opsional)</label>
+                <input type="file" name="portofolio" id="portofolio" accept=".pdf,.docx,.pptx">
+                <small class="file-info">Format: PDF, DOCX, PPTX (Max: 4MB)</small>
+                @error('portofolio')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
 
-            <label for="portofolio">Portofolio (Opsional)</label>
-            <input type="file" name="portofolio" id="portofolio" accept=".pdf,.docx,.pptx">
-
-            <button type="submit">Kirim Pendaftaran</button>
-            
-            <a href="{{ url('/dashboard') }}" class="btn-back">← Kembali ke Beranda</a>
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Kirim Pendaftaran</button>
+                <a href="{{ route('user.dashboard') }}" class="btn-back">← Kembali ke Beranda</a>
+            </div>
 
         </form>
     </div>
 </body>
+
 </html>
