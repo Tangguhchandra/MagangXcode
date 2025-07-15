@@ -153,16 +153,32 @@ body {
     }
 
     .right-section {
-        padding: 40px 30px;
+        padding: 50px 30px;
     }
 
     .logo {
-        top: 20px;
-        right: 20px;
+        top: -30px;
+        right: center;
         font-size: 16px;
     }
 
     .form-title {
         font-size: 28px;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    .container {
+        flex-direction: row;
+    }
+    .logo {
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .poster-image {
+        width: 100%;
+        object-fit: fill;
+        min-height: 50vh;
     }
 }
