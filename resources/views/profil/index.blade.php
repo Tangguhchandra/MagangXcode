@@ -94,11 +94,11 @@
                                     </div>
                                     <div class="bio-item">
                                         <label>Mulai magang</label>
-                                        <p>{{ $daftar->mulai_magang->format('D M Y') }}</p>
+                                        <p>{{ $daftar->mulai_magang}}</p>
                                     </div>
                                     <div class="bio-item">
                                         <label>Selesai magang</label>
-                                        <p>{{ $daftar->selesai_magang->format('D M Y') }}</p>
+                                        <p>{{ $daftar->selesai_magang}}</p>
                                     </div>
                                 </div>
                             @endif
