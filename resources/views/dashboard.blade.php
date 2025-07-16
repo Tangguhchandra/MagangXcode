@@ -5,8 +5,6 @@
     <section class="hero">
         <div class="hero-content">
             <h1 id="typing-text">
-                <!-- Efek akan diketik di sini -->
-                <span id="typed-output"></span>
             </h1>
             <p>Bergabunglah dengan kami untuk mengembangkan diri di dunia profesional.</p>
             <a href="{{ route('pendaftaran.form') }}" class="cta-button">Isi Form Sekarang</a>
@@ -137,7 +135,7 @@
                 </div>
             </a>
         </div>
-    </section>
+    </section>  
 
     <footer class="footer">
         <p>© 2025 XCODE Internships. All rights reserved.</p>
@@ -145,55 +143,58 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
-    <!-- Custom JavaScript -->
-    <script>
-        // Typing Effect
-        document.addEventListener('DOMContentLoaded', function() {
-            const typedOutput = document.getElementById('typed-output');
-            const textToType = 'Selamat Datang di Program Magang XCODE';
-            let i = 0;
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Typing Effect Personalized
+        const username = "{{ Auth::user()->name }}";
+        const el = document.getElementById("typing-text");
 
-            function typeWriter() {
-                if (i < textToType.length) {
-                    typedOutput.innerHTML += textToType.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
+        const textBeforeName = "Raih Pengalaman Magang Terbaik, Hello ";
+        const highlightedName = `<span class="username-highlight">${username}</span>`;
+
+        let i = 0;
+
+        function typeWriter() {
+            if (i < textBeforeName.length) {
+                el.innerHTML = textBeforeName.substring(0, i + 1);
+                i++;
+                setTimeout(typeWriter, 80);
+            } else {
+                el.innerHTML = textBeforeName + highlightedName;
+            }
+        }
+
+        typeWriter();
+
+        // Swiper Init
+        const swiper = new Swiper('.program-slider', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 1,
+                },
+                1024: {
+                    slidesPerView: 1,
                 }
             }
-
-            // Start typing effect after a short delay
-            setTimeout(typeWriter, 500);
         });
+    });
+</script>
 
-        // Initialize Swiper
-        document.addEventListener('DOMContentLoaded', function() {
-            const swiper = new Swiper('.program-slider', {
-                slidesPerView: 1,
-                spaceBetween: 30,
-                loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                breakpoints: {
-                    768: {
-                        slidesPerView: 1,
-                    },
-                    1024: {
-                        slidesPerView: 1,
-                    }
-                }
-            });
-        });
-    </script>
 @endsection
