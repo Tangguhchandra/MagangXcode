@@ -1,8 +1,27 @@
 body {
     font-family: "Poppins", sans-serif;
-    background-color: #f8f8f8;
     padding: 50px 20px;
+    background-image: url('/images/6.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* agar tidak bergerak saat scroll */
+    position: relative;
+    z-index: 0;
 }
+
+/* Overlay gelap */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* tingkat kegelapan background */
+    z-index: -1;
+}
+
 
 .form-container {
     max-width: 600px;

@@ -25,6 +25,7 @@
 <body>
     <div class="box">
         <h2>Pendaftaran berhasil!</h2>
+        <p>Konfirmasi pendaftaran akan kami kabari lewat email.</p>
         <p>Kamu akan diarahkan ke dashboard dalam beberapa detik...</p>
     </div>
 </body>
