@@ -32,36 +32,48 @@
                         <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=3b82f6&color=fff&rounded=true&size=200"
                             alt="Profile Picture">
                     </div>
-                    <h2 class="profile-name">{{ $user->name }}</h2>
-                    <p class="profile-role">{{ $user->email }}</p>
+                    <h2 class="profile-name">{{ $user->name ? $user->name : 'Member' }}</h2>
+                    <p class="profile-role">{{ $user->email ? $user->email : 'example@gmail.com' }}</p>
+
+                    <!-- Add badges based on user status -->
+
                 </div>
             </div>
 
             <!-- Right Section - Bio & Details -->
-            @if ($pendaftaran->count() > 0)
-                <div class="bio-card" data-aos="fade-up">
-                    @foreach ($pendaftaran as $daftar)
-                        <div class="bio-header">
-                            <h3>Informasi saya</h3>
-                            <div class="status-indicator">
-                                <span class="status-dot active"></span>
-                            </div>
-                        </div>
-
-                        <div class="bio-content">
-                            <div class="bio-grid">
-                                <div class="bio-item">
-                                    <label>Divisi</label>
-                                    <p>{{ $daftar->divisi ?? 'Member' }}</p>
-                                </div>
-                                <div class="bio-item">
-                                    <label>Email</label>
-                                    <p>{{ $user->email }}</p>
-                                </div>
-                                <div class="bio-item">
-                                    <label>Status</label>
-                                    <p>
-                                        <span>
+            <div class="bio-card" data-aos="fade-up">
+                <div class="bio-header">
+                    <h3>Informasi saya</h3>
+                    <div class="status-indicator">
+                        <span class="status-dot active"></span>
+                    </div>
+                </div>
+                <div class="bio-content">
+                    @if ($pendaftaran->count() > 0)
+                        <!-- User has registrations -->
+                        @foreach ($pendaftaran as $index => $daftar)
+                            @if ($index == 0)
+                                <!-- Show only the latest registration -->
+                                <div class="bio-grid">
+                                    <div class="bio-item">
+                                        <label>Nama Lengkap</label>
+                                        <p>{{ $user->name ?? 'Belum diisi' }}</p>
+                                    </div>
+                                    <div class="bio-item">
+                                        <label>Email</label>
+                                        <p>{{ $user->email }}</p>
+                                    </div>
+                                    <div class="bio-item">
+                                        <label>Institusi</label>
+                                        <p>{{ $daftar->nama_institusi ?? 'Belum diisi' }}</p>
+                                    </div>
+                                    <div class="bio-item">
+                                        <label>Divisi</label>
+                                        <p>{{ $daftar->divisi ?? 'Belum diisi' }}</p>
+                                    </div>
+                                    <div class="bio-item">
+                                        <label>Status Pendaftaran</label>
+                                        <p>
                                             @php
                                                 $statusClass = match ($daftar->status) {
                                                     'pending' => 'badge badge-warning',
@@ -71,32 +83,65 @@
                                                 };
                                             @endphp
                                             <span class="{{ $statusClass }}">{{ ucfirst($daftar->status) }}</span>
-                                        </span>
-                                    </p>
+                                        </p>
+                                    </div>
+                                    <div class="bio-item">
+                                        <label>Tanggal Daftar</label>
+                                        <p>{{ $daftar->created_at->format('d M Y') }}</p>
+                                    </div>
+                                    <div class="bio-item">
+                                        <label>Member sejak</label>
+                                        <p>{{ $user->created_at->format('d M Y') }}</p>
+                                    </div>
+                                    <div class="bio-item">
+                                        <label>Terakhir Diperbarui</label>
+                                        <p>{{ $user->updated_at->diffForHumans() }}</p>
+                                    </div>
                                 </div>
-                                <div class="bio-item">
-                                    <label>Member sejak</label>
-                                    <p>{{ $user->created_at->format('M d, Y') }}</p>
-                                </div>
-                                <div class="bio-item">
-                                    <label>Terakhir Diperbarui</label>
-                                    <p>{{ $user->updated_at->diffForHumans() }}</p>
-                                </div>
-                                {{-- <div class="bio-item">
-                                    <label>Account Status</label>
-                                    <p class="availability">
-                                        <span class="status-dot active"></span>
-                                        Active Member
-                                    </p>
-                                </div> --}}
 
+                               
+                            @endif
+                        @endforeach
+                    @else
+                        <!-- User has no registrations -->
+                        <div class="bio-grid">
+                            <div class="bio-item">
+                                <label>Nama Lengkap</label>
+                                <p>{{ $user->name ?? 'Belum diisi' }}</p>
+                            </div>
+                            <div class="bio-item">
+                                <label>Email</label>
+                                <p>{{ $user->email }}</p>
+                            </div>
+                            <div class="bio-item">
+                                <label>Institusi</label>
+                                <p class="text-muted">Belum ada pendaftaran</p>
+                            </div>
+                            <div class="bio-item">
+                                <label>Divisi</label>
+                                <p class="text-muted">Belum ada pendaftaran</p>
+                            </div>
+                            <div class="bio-item">
+                                <label>Status Pendaftaran</label>
+                                <p>
+                                    <span class="badge badge-info">Belum Mendaftar</span>
+                                </p>
+                            </div>
+                            <div class="bio-item">
+                                <label>Member sejak</label>
+                                <p>{{ $user->created_at->format('d M Y') }}</p>
+                            </div>
+                            <div class="bio-item">
+                                <label>Terakhir Diperbarui</label>
+                                <p>{{ $user->updated_at->diffForHumans() }}</p>
                             </div>
                         </div>
-                    @endforeach
+
+                      
+                    @endif
                 </div>
+            </div>
         </div>
-        @endif
+
     </div>
-
-
 @endsection
