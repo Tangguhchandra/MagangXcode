@@ -24,6 +24,8 @@ class Pendaftaran extends Model
         'cv',
         'portofolio',
         'status',
+        'mulai_magang', // Tanggal mulai magang
+        'selesai_magang', // Tanggal selesai magang
     ];
 
     // (Opsional) Relasi ke User

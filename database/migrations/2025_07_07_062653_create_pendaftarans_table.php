@@ -22,6 +22,8 @@ public function up()
         $table->string('cv');
         $table->string('portofolio')->nullable();
         $table->enum('status', ['pending', 'diterima', 'ditolak'])->default('pending');
+        $table->date('mulai_magang');
+        $table->date('selesai_magang');
         $table->timestamps();
     });
 }

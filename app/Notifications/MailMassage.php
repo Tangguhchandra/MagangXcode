@@ -11,15 +11,16 @@ class MailMassage extends Notification
 {
     use Queueable;
 
-    protected $pelamar;
+    protected $pendaftar;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($pelamar)
+    public function __construct($pendaftar)
     {
-        $this->pelamar = $pelamar;
+        $this->pendaftar = $pendaftar;
     }
+
 
     /**
      * Get the notification's delivery channels.
@@ -38,7 +39,7 @@ class MailMassage extends Notification
     {
         return (new MailMessage)
                     ->subject('Selamat! Pendaftaran Anda Diterima')
-                    ->greeting('Halo ' . $this->pelamar->nama)
+                    ->greeting('Halo ' . $this->pendaftar->nama)
                     ->line('Selamat! Pendaftaran magang Anda telah diterima.')
                     ->line('Silakan hubungi kami untuk informasi lebih lanjut.')
                     ->action('Login ke Dashboard', url('/dashboard'))

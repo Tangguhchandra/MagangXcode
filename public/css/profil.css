@@ -187,7 +187,68 @@ body {
     font-size: 0.8rem;
 }
 
+/* Additional styles for empty state and statistics */
+.text-muted {
+    color: #9ca3af !important;
+    font-style: italic;
+}
 
+.badge-info {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.badge-warning {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.badge-success {
+    background-color: #10b981;
+    color: white;
+}
+
+.badge-danger {
+    background-color: #ef4444;
+    color: white;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.stats-grid .stat-item {
+    transition: transform 0.2s ease;
+}
+
+.stats-grid .stat-item:hover {
+    transform: translateY(-2px);
+}
+
+.table-container table th,
+.table-container table td {
+    border: none;
+}
+
+.table-container table tr:hover {
+    background-color: #f8fafc;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
