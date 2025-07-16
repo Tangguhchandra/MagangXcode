@@ -1,5 +1,5 @@
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     background-color: #f8f8f8;
     padding: 50px 20px;
 }
@@ -173,7 +173,7 @@ button[type="submit"]:hover {
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s;
 }
 
@@ -202,12 +202,12 @@ select:focus {
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .btn-submit {
         max-width: 100%;
         width: 100%;
     }
-    
+
     .form-container {
         padding: 20px;
         margin: 20px 10px;

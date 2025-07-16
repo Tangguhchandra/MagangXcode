@@ -40,12 +40,7 @@ class PendaftaranResource extends Resource
                 Forms\Components\TextInput::make('divisi')
                     ->disabled(),
                 
-                Forms\Components\TextInput::make('durasi_magang')
-                    ->label('Durasi Magang (bulan)')
-                    ->numeric()
-                    ->minValue(1)
-                    ->required()
-                    ->disabled(), // Nonaktifkan jika hanya admin yang boleh edit
+            
 
 
                 Forms\Components\FileUpload::make('foto')

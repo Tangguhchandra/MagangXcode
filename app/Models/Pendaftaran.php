@@ -18,6 +18,8 @@ class Pendaftaran extends Model
         'jenis_kelamin',
         'instansi',
         'divisi',
+        'mulai_magang',
+        'selesai_magang',
         'foto',
         'cv',
         'portofolio',
