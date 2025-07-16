@@ -378,10 +378,23 @@ body {
         transform: translateY(0);
     }
 }
-.username-highlight {
-    text-decoration: underline;
-    font-weight: bold;
-}
+#typing-text {
+            /* font-family: 'Lobster Two' ;  */
+            font-size: 2.8em; /* Ukuran font lebih besar untuk hero text */
+            font-weight: 700; 
+            color: #ffffff; 
+            line-height: 1.3; 
+            
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .username-highlight {
+            /* font-family: 'Lobster Two';  */
+            color: #ffffff; 
+            font-weight: 900; 
+            text-decoration: underline;
+  
+        }
 
 .hero h1 {
     font-size: 48px;
