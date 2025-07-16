@@ -49,12 +49,17 @@
                
 
                 <li>
-                    <a href="#">
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
                         <span class="title">Sign Out</span>
                     </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                    </form>
+
                 </li>
             </ul>
         </div>
@@ -149,7 +154,7 @@
                         @foreach ($recent as $item)
                             <tr>
                                 <td width="60px">
-                                    <div class="imgBx"><img src="{{ asset('assets/imgs/customer01.jpg') }}" alt="img"></div>
+                                    <div class="imgBx"><img src="{{ asset('storage/' . $item->foto) }}" alt="img"></div>
                                 </td>
                                 <td>
                                     <h4>{{ $item->nama }}<br><span>{{ $item->divisi }}</span></h4>

@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\ProfilController;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\AdminDashboardController;
 
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -36,3 +37,6 @@ Route::middleware('auth')->group(function () {
     })->name('logout');
 });
 // Logout
+
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
+Route::patch('/admin/update-status/{id}', [App\Http\Controllers\AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
