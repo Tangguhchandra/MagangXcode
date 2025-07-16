@@ -91,8 +91,14 @@
                     <span class="error-text">{{ $message }}</span>
                 @enderror
             </div>
-            <label for="durasi_magang">Durasi Magang (dalam bulan)</label>
-            <input type="number" class="form-input" id="durasi_magang" name="durasi_magang" placeholder="Contoh: 3" min="1" required>
+            <div class="form-group">
+                <label for="mulai_magang">Mulai Magang</label>
+                <input type="date" class="form-input" id="mulai_magang" name="mulai_magang" required>
+
+                <label for="selesai_magang" class="mt-2">Selesai Magang</label>
+                <input type="date" class="form-input" id="selesai_magang" name="selesai_magang" required>
+            </div>
+
 
             <div class="form-group">
                 <label for="foto">Foto Profesional</label>

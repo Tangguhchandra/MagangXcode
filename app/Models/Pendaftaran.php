@@ -18,7 +18,8 @@ class Pendaftaran extends Model
         'jenis_kelamin',
         'instansi',
         'divisi',
-        'durasi_magang', // Tambahkan kolom durasi magang
+        'mulai_magang',
+        'selesai_magang',
         'foto',
         'cv',
         'portofolio',
