@@ -32,6 +32,7 @@ class PendaftaranController extends Controller
                 'email' => $request->email, // ✅ Simpan email
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'instansi' => $request->instansi,
+                'durasi_magang' => $request->durasi_magang,
                 'divisi' => $request->divisi,
                 'foto' => $foto,
                 'cv' => $cv,

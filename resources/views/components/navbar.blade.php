@@ -41,7 +41,16 @@
       <li><a href="#program">Program</a></li>
       <li><a href="#kontak">Kontak</a></li>
       <li><a href="{{ route('profil') }}">Profil</a></li>
-      <li><a href="{{ route('logout') }}">Logout</a></li>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+       @csrf
+      </form>
+
+      <li>
+        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          Logout
+        </a>
+      </li>
+
     </ul>
   </div>
 
