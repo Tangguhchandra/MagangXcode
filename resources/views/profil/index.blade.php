@@ -34,7 +34,6 @@
                     </div>
                     <h2 class="profile-name">{{ $user->name ? $user->name : 'Member' }}</h2>
                     <p class="profile-role">{{ $user->email ? $user->email : 'example@gmail.com' }}</p>
-
                     <!-- Add badges based on user status -->
 
                 </div>
@@ -94,12 +93,14 @@
                                         <p>{{ $user->created_at->format('d M Y') }}</p>
                                     </div>
                                     <div class="bio-item">
-                                        <label>Terakhir Diperbarui</label>
-                                        <p>{{ $user->updated_at->diffForHumans() }}</p>
+                                        <label>Mulai magang</label>
+                                        <p>{{ $daftar->mulai_magang->format('D M Y') }}</p>
+                                    </div>
+                                    <div class="bio-item">
+                                        <label>Selesai magang</label>
+                                        <p>{{ $daftar->selesai_magang->format('D M Y') }}</p>
                                     </div>
                                 </div>
-
-                               
                             @endif
                         @endforeach
                     @else
@@ -132,12 +133,14 @@
                                 <p>{{ $user->created_at->format('d M Y') }}</p>
                             </div>
                             <div class="bio-item">
-                                <label>Terakhir Diperbarui</label>
-                                <p>{{ $user->updated_at->diffForHumans() }}</p>
+                                <label>Mulai magang</label>
+                                <p class="text-muted">Belum ada pendaftaran</p>
+                            </div>
+                            <div class="bio-item">
+                                <label>Selesai magang</label>
+                                <p class="text-muted">Belum ada pendaftaran</p>
                             </div>
                         </div>
-
-                      
                     @endif
                 </div>
             </div>

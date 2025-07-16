@@ -26,6 +26,8 @@ class PendaftarRequest extends FormRequest
             'email' => 'required|email|regex:/@gmail\.com$/i|unique:pendaftarans,email',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'instansi' => 'required|string|max:255',
+            'mulai_magang' => 'required|date',
+            'selesai_magang' => 'required|date|after_or_equal:mulai_magang',
             'divisi' => 'required|string|max:255',
             'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'cv' => 'required|mimes:pdf|max:2048',
@@ -51,6 +53,13 @@ class PendaftarRequest extends FormRequest
             'instansi.required' => 'Instansi wajib diisi.',
             'instansi.string' => 'Instansi harus berupa teks.',
             'instansi.max' => 'Instansi maksimal 255 karakter.',
+
+            'mulai_magang.required' => 'Tanggal mulai magang wajib diisi.',
+            'mulai_magang.date' => 'Tanggal mulai magang tidak valid.',
+            
+            'selesai_magang.required' => 'Tanggal selesai magang wajib diisi.',
+            'selesai_magang.date' => 'Tanggal selesai magang tidak valid.',
+            'selesai_magang.after_or_equal' => 'Tanggal selesai magang harus setelah atau sama dengan tanggal mulai magang.',
             
             'divisi.required' => 'Divisi wajib diisi.',
             'divisi.string' => 'Divisi harus berupa teks.',

@@ -91,13 +91,29 @@
                     <span class="error-text">{{ $message }}</span>
                 @enderror
             </div>
-            <label for="durasi_magang">Durasi Magang (dalam bulan)</label>
-            <input type="number" class="form-input" id="durasi_magang" name="durasi_magang" placeholder="Contoh: 3" min="1" required>
+            <div class="form-group">
+                <label for="mulai_magang">Mulai Magang</label>
+                <input type="date" id="mulai_magang" name="mulai_magang" value="{{ old('mulai_magang') }}" required>
+                @error('mulai_magang')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="selesai_magang">Selesai Magang</label>
+                <input type="date" id="selesai_magang" name="selesai_magang" value="{{ old('selesai_magang') }}"
+                    required>
+                @error('selesai_magang')
+                    <span class="error-text">{{ $message }}</span>
+                @enderror
+            </div>
+
+
 
             <div class="form-group">
                 <label for="foto">Foto Profesional</label>
                 <input type="file" name="foto" id="foto" accept="image/*" required>
-                <small class="file-info">Format: JPG, PNG (Max: 2MB)</small>
+                <small class="file-info">Format: JPG`, PNG (Max: 2MB)</small>
                 @error('foto')
                     <span class="error-text">{{ $message }}</span>
                 @enderror
