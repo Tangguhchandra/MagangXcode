@@ -63,8 +63,8 @@
                                         <p>{{ $user->email }}</p>
                                     </div>
                                     <div class="bio-item">
-                                        <label>Institusi</label>
-                                        <p>{{ $daftar->nama_institusi ?? 'Belum diisi' }}</p>
+                                        <label>Instansi</label>
+                                        <p>{{ $daftar->instansi ?? 'Belum diisi' }}</p>
                                     </div>
                                     <div class="bio-item">
                                         <label>Divisi</label>
@@ -115,7 +115,7 @@
                                 <p>{{ $user->email }}</p>
                             </div>
                             <div class="bio-item">
-                                <label>Institusi</label>
+                                <label>Instansi</label>
                                 <p class="text-muted">Belum ada pendaftaran</p>
                             </div>
                             <div class="bio-item">

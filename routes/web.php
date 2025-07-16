@@ -40,3 +40,14 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
 Route::patch('/admin/update-status/{id}', [App\Http\Controllers\AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
+
+// list pendaftaran
+Route::get('/admin/pendaftar', [AdminDashboardController::class, 'listPendaftar'])->middleware('auth')->name('admin.pendaftar');
+
+// API route to get pendaftaran by ID
+Route::get('/api/pendaftar/{id}', function ($id) {
+    return \App\Models\Pendaftaran::findOrFail($id);
+});
+
+// Status di list pendaftar
+Route::patch('/admin/update-status/{id}', [AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
