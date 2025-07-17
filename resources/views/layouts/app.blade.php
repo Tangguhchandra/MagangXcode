@@ -11,10 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
     
     <!-- Tailwind -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/[email protected]/dist/tailwind.min.css" rel="stylesheet">
+
 
     <!-- Dashboard Custom CSS -->
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}?v={{ time() }}" rel="stylesheet">
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
@@ -48,6 +50,23 @@
                 padding-top: 70px;
             }
         }
+
+
+    :root {
+        --swiper-theme-color: #e63946;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: #e63946 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: #e63946 !important;
+    }
+
+
+
     </style>
 
 </head>
