@@ -93,7 +93,7 @@
                             type="button" 
                             class="btn-detail" 
                             data-id="{{ $item->id }}">
-                            🔍 Detail
+                            Detail
                         </button>
 
                     </div>
@@ -106,8 +106,8 @@
                     <h3>Detail Pendaftar</h3>
                     <div id="modalContent">Loading...</div>
                     <div id="actionButtons" style="margin-top: 20px; text-align: right; display: none;">
-                    <button onclick="ubahStatus('diterima')" style="background-color: #28a745; color: white; padding: 8px 12px; margin-right: 10px; border: none; border-radius: 6px;">Terima</button>
-                    <button onclick="ubahStatus('ditolak')" style="background-color: #dc3545; color: white; padding: 8px 12px; border: none; border-radius: 6px;">Tolak</button>
+                    <button onclick="ubahStatus('diterima')" style="background-color: #28a745; color: white; padding: 8px 12px; margin-right: 10px; border: none; border-radius: 6px; cursor: pointer;">Terima</button>
+                    <button onclick="ubahStatus('ditolak')" style="background-color: #dc3545; color: white; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer;">Tolak</button>
                     </div>
                 </div>
             </div>
@@ -170,11 +170,11 @@
 
     function ubahStatus(status) {
         if (!currentPendaftarId) return;
-
         fetch(`/admin/update-status/${currentPendaftarId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'X-CSRF-TOKEN': '{{ csrf_token() }}' // untuk Laravel
             },
             body: JSON.stringify({ status })

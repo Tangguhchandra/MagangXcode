@@ -39,20 +39,16 @@ class AdminDashboardController extends Controller
      */
     public function updateStatus(Request $request, $id)
     {
-        // ✅ Validasi status yang dikirim
         $request->validate([
             'status' => 'required|in:pending,diterima,ditolak',
         ]);
 
         try {
-            // ✅ Temukan data pendaftar berdasarkan ID
             $pendaftar = Pendaftaran::findOrFail($id);
 
-            // ✅ Update status
             $pendaftar->status = $request->status;
             $pendaftar->save();
 
-            // ✅ Kirim email jika status diterima
             if ($request->status === 'diterima') {
                 try {
                     Mail::to($pendaftar->email)->send(new PendaftaranDiterima($pendaftar));
@@ -62,7 +58,6 @@ class AdminDashboardController extends Controller
                 }
             }
 
-            // ✅ Kalau request-nya dari JavaScript (AJAX), balas JSON
             if ($request->wantsJson()) {
                 return response()->json([
                     'success' => true,
@@ -70,7 +65,6 @@ class AdminDashboardController extends Controller
                 ]);
             }
 
-            // ✅ Kalau bukan AJAX, redirect biasa
             return back()->with('success', 'Status berhasil diperbarui.');
 
         } catch (\Exception $e) {
