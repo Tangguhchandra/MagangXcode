@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfilController;
@@ -9,28 +8,20 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\AdminDashboardController;
 
+// Register & Login
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
-
-// Login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-// landing page
+// Landing Page
 Route::get('/', [DashboardController::class, 'index'])->name('home');
 
-// dashboard user
-
-
+// Protected Routes (Login Required)
 Route::middleware('auth')->group(function () {
-    // dashboard logged 
     Route::get('/dashboard', [DashboardController::class, 'DashboardUser'])->name('user.dashboard');
-
-    // pendaftaran
     Route::get('/pendaftaran', [PendaftaranController::class, 'create'])->name('pendaftaran.form');
     Route::post('/pendaftaranStore', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
-
-    // profil
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
 
     Route::post('/logout', function () {
@@ -38,15 +29,11 @@ Route::middleware('auth')->group(function () {
         return redirect('/');
     })->name('logout');
 
-    
+    // Admin Routes (Login + Admin Middleware)
     Route::middleware('admin')->group(function () {
-        // Admin routes
-        Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
-        Route::patch('/admin/update-status/{id}', [App\Http\Controllers\AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
+        Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/admin/pendaftar', [AdminDashboardController::class, 'listPendaftar'])->name('admin.pendaftar');
-
         Route::get('/admin/pendaftar/{id}/detail', [AdminDashboardController::class, 'showDetail']);
-
+        Route::patch('/admin/update-status/{id}', [AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
     });
 });
-// Logout

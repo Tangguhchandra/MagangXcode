@@ -14,8 +14,8 @@
     </style>
 
     <!-- Ionicons CDN -->
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </head>
 
@@ -51,7 +51,6 @@
                     </a>
                 </li>
 
-               
                 <li>
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <span class="icon">
@@ -73,13 +72,27 @@
             <!-- Topbar -->
             <div class="topbar">
                 <div class="toggle"><ion-icon name="menu-outline"></ion-icon></div>
-                <div class="search"><label><input type="text" placeholder="Search here"><ion-icon name="search-outline"></ion-icon></label></div>
+                <div class="search">
+                    <form id="searchForm" action="{{ route('admin.pendaftar') }}" method="GET">
+                        <label>
+                            <input 
+                                type="text" 
+                                name="search" 
+                                id="searchInput"
+                                placeholder="Cari nama..." 
+                                value="{{ request('search') }}"
+                                autocomplete="off"
+                            >
+                            <ion-icon name="search-outline"></ion-icon>
+                        </label>
+                    </form>
+                </div>
                 <div class="user"><img src="{{ asset('assets/imgs/customer01.jpg') }}" alt="User"></div>
             </div>
 
             <!-- CARD -->
             <div class="card-container">
-                @foreach ($pendaftars as $item)
+                @foreach ($pendaftar as $item)
                     <div class="pendaftar-card">
                         <h3>{{ $item->nama }}</h3>
                         <p><strong>Instansi:</strong> {{ $item->instansi }}</p>
@@ -95,7 +108,6 @@
                             data-id="{{ $item->id }}">
                             Detail
                         </button>
-
                     </div>
                 @endforeach
             </div>
@@ -106,13 +118,11 @@
                     <h3>Detail Pendaftar</h3>
                     <div id="modalContent">Loading...</div>
                     <div id="actionButtons" style="margin-top: 20px; text-align: right; display: none;">
-                    <button onclick="ubahStatus('diterima')" style="background-color: #28a745; color: white; padding: 8px 12px; margin-right: 10px; border: none; border-radius: 6px; cursor: pointer;">Terima</button>
-                    <button onclick="ubahStatus('ditolak')" style="background-color: #dc3545; color: white; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer;">Tolak</button>
+                        <button onclick="ubahStatus('diterima')" style="background-color: #28a745; color: white; padding: 8px 12px; margin-right: 10px; border: none; border-radius: 6px; cursor: pointer;">Terima</button>
+                        <button onclick="ubahStatus('ditolak')" style="background-color: #dc3545; color: white; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer;">Tolak</button>
                     </div>
                 </div>
             </div>
-
-
 
         </div>
     </div>
@@ -121,8 +131,8 @@
     <script>
     document.querySelectorAll(".navigation li").forEach((item) => {
         item.addEventListener("mouseover", function () {
-        document.querySelectorAll(".navigation li").forEach((el) => el.classList.remove("hovered"));
-        this.classList.add("hovered");
+            document.querySelectorAll(".navigation li").forEach((el) => el.classList.remove("hovered"));
+            this.classList.add("hovered");
         });
     });
 
@@ -174,8 +184,7 @@
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}' // untuk Laravel
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             body: JSON.stringify({ status })
         })
@@ -185,14 +194,25 @@
         })
         .then(data => {
             alert('Status berhasil diperbarui!');
-            location.reload(); // Refresh agar status di halaman ikut berubah
+            location.reload();
         })
         .catch(err => {
             console.error(err);
             alert('Terjadi kesalahan saat mengubah status.');
         });
     }
-</script>
+
+    const searchInput = document.getElementById('searchInput');
+    const searchForm = document.getElementById('searchForm');
+    let timer;
+
+    searchInput.addEventListener('input', function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            searchForm.submit();
+        }, 500);
+    });
+    </script>
 
 </body>
 </html>
