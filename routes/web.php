@@ -20,6 +20,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/', [DashboardController::class, 'index'])->name('home');
 
 // dashboard user
+
+
 Route::middleware('auth')->group(function () {
     // dashboard logged 
     Route::get('/dashboard', [DashboardController::class, 'DashboardUser'])->name('user.dashboard');
@@ -35,8 +37,12 @@ Route::middleware('auth')->group(function () {
         Auth::logout();
         return redirect('/');
     })->name('logout');
+
+    
+    Route::middleware('admin')->group(function () {
+        // Admin routes
+        Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
+        Route::patch('/admin/update-status/{id}', [App\Http\Controllers\AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
+    });
 });
 // Logout
-
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
-Route::patch('/admin/update-status/{id}', [App\Http\Controllers\AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
