@@ -16,8 +16,13 @@ class PendaftaranController extends Controller
     {
 
         try {
-            $validatedData = $request->validated();
 
+            $user = Auth::user();
+            if (!$user->email_verified_at) {
+                return redirect()->back()->withErrors(['email' => 'Email Anda belum diverifikasi. Silakan periksa email Anda untuk verifikasi.']);
+            }
+
+            $validatedData = $request->validated();
             // handle file uploads
             $foto = $request->file('foto')->store('pendaftaran/foto', 'public');
             $cv = $request->file('cv')->store('pendaftaran/cv', 'public');
@@ -25,21 +30,13 @@ class PendaftaranController extends Controller
                 ? $request->file('portofolio')->store('pendaftaran/portofolio', 'public')
                 : null;
 
-            //   create a new Pendaftaran record
-            $pendaftaran =  Pendaftaran::create([
+            $pendaftaran = Pendaftaran::create(attributes: array_merge(array: $validatedData, arrays: [
                 'user_id' => Auth::id(),
-                'nama' => $request->nama,
-                'email' => $request->email, // ✅ Simpan email
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'instansi' => $request->instansi,
-                'mulai_magang' => $request->mulai_magang,
-                'selesai_magang' => $request->selesai_magang,
-                'divisi' => $request->divisi,
                 'foto' => $foto,
                 'cv' => $cv,
                 'portofolio' => $portofolio,
-            ]);
-            return view('pendaftaran.success')->with('pendaftaran', $pendaftaran);
+            ]));
+            return view('pendaftaran.success')->with('pendaftaran', value: $pendaftaran);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data: ' . $e->getMessage()]);
         }
