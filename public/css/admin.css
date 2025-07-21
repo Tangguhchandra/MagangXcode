@@ -263,6 +263,19 @@ body {
   color: var(--white);
 }
 
+.card.active {
+    background-color: #a60000;
+    color: white;
+}
+
+.card.active .numbers,
+.card.active .cardName,
+.card.active .iconBx {
+    color: white;
+}
+
+
+
 /* ================== Pemagang Details List ============== */
 .details {
   position: relative;
@@ -273,6 +286,53 @@ body {
   grid-gap: 30px;
   /* margin-top: 10px; */
 }
+
+th {
+    text-align: left;
+}
+
+.list-pendaftar {
+    margin-top: 0;
+    padding: 0;
+}
+
+.list-pendaftar .cardHeader {
+    margin-bottom: 10px;
+    color: #b30000;
+}
+
+.table-pendaftar {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    font-size: 15px;
+}
+
+.table-pendaftar th,
+.table-pendaftar td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.table-pendaftar thead {
+    background-color: #f3f3f3;
+    font-weight: bold;
+}
+
+.table-pendaftar a {
+    color: blue;
+    text-decoration: underline;
+}
+
+.table-pendaftar select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+    background-color: #fff;
+}
+
+
 
 .details .recentPemagang {
   position: relative;
@@ -294,6 +354,24 @@ body {
   color: var(--red);
 }
 .cardHeader .btn {
+  position: relative;
+  padding: 5px 10px;
+  background: var(--red);
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 6px;
+}
+
+.details .cardHeader2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.cardHeader2 h2 {
+  font-weight: 600;
+  color: var(--red);
+}
+.cardHeader2 .btn {
   position: relative;
   padding: 5px 10px;
   background: var(--red);
@@ -445,6 +523,9 @@ body {
     grid-template-columns: repeat(1, 1fr);
   }
   .cardHeader h2 {
+    font-size: 20px;
+  }
+  .cardHeader2 h2 {
     font-size: 20px;
   }
   .user {

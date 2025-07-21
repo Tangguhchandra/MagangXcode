@@ -665,7 +665,7 @@ body {
     text-decoration: none;
     border-radius: 999px;
     padding: 20px 30px;
-    width: 320px;
+    width: 330px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease;
 }
