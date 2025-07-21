@@ -216,19 +216,19 @@ body {
 
 /* ======================= buat yang Cards ====================== */
 .card-container {
-    display: flex;
+    display: grid;
     padding: 60px 20px;
-    flex-wrap: wrap;
+    grid-template-columns: repeat(2, 1fr); /* 2 kolom */
     gap: 20px;
-    justify-content: flex-start;
     margin-top: -20px;
+    justify-items: center; /* agar item tetap tengah */
 }
 
 .pendaftar-card {
     background-color: #fff;
     border: 1px solid #ddd;
-    width: 555px; /* fixed width */
-    height: 230px; /* fixed height supaya seragam */
+    width: 100%; /* agar responsif dalam grid */
+    max-width: 500px; /* batasi ukuran maksimum */
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);

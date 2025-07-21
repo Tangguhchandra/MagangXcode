@@ -72,7 +72,6 @@ class AdminDashboardController extends Controller
 
             // ✅ Kalau bukan AJAX, redirect biasa
             return back()->with('success', 'Status berhasil diperbarui.');
-
         } catch (\Exception $e) {
             Log::error('Gagal update status: ' . $e->getMessage());
 
@@ -94,9 +93,13 @@ class AdminDashboardController extends Controller
      */
     public function listPendaftar()
     {
-        $pendaftar = \App\Models\Pendaftaran::latest()->get();
+        $pendaftars = Pendaftaran::latest()->get();
 
-        return view('admin.list-pendaftar', compact('pendaftar'));
-
+        return view('admin.list-pendaftar', compact('pendaftars'));
     }
+
+    public function showDetail($id)
+    {
+        $pendaftar = Pendaftaran::findOrFail($id);
+    return response()->json($pendaftar);    }
 }
