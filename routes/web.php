@@ -43,6 +43,10 @@ Route::middleware('auth')->group(function () {
         // Admin routes
         Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
         Route::patch('/admin/update-status/{id}', [App\Http\Controllers\AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
+        Route::get('/admin/pendaftar', [AdminDashboardController::class, 'listPendaftar'])->name('admin.pendaftar');
+
+        Route::get('/admin/pendaftar/{id}/detail', [AdminDashboardController::class, 'showDetail']);
+
     });
 });
 // Logout

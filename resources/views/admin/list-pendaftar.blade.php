@@ -79,7 +79,7 @@
 
             <!-- CARD -->
             <div class="card-container">
-                @foreach ($pendaftar as $item)
+                @foreach ($pendaftars as $item)
                     <div class="pendaftar-card">
                         <h3>{{ $item->nama }}</h3>
                         <p><strong>Instansi:</strong> {{ $item->instansi }}</p>
@@ -142,7 +142,7 @@
             const id = this.getAttribute('data-id');
             currentPendaftarId = id;
 
-            fetch(`/api/pendaftar/${id}`)
+            fetch(`/admin/pendaftar/${id}/detail`)
                 .then(res => res.json())
                 .then(data => {
                     document.getElementById('modalContent').innerHTML = `
@@ -192,8 +192,6 @@
             alert('Terjadi kesalahan saat mengubah status.');
         });
     }
-
-    
 </script>
 
 </body>

@@ -75,7 +75,7 @@
 
             <!-- Cards -->
             <div class="cardBox">
-                <div class="card">
+                <div class="card active" data-status="all">
                     <div>
                         <div class="numbers">{{ $total }}</div>
                         <div class="cardName">Total Pendaftar</div>
@@ -83,7 +83,7 @@
                     <div class="iconBx"><ion-icon name="person-add-outline"></ion-icon></div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-status="diterima">
                     <div>
                         <div class="numbers">{{ $diterima }}</div>
                         <div class="cardName">Diterima</div>
@@ -91,7 +91,7 @@
                     <div class="iconBx"><ion-icon name="checkmark-circle-outline"></ion-icon></div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-status="pending">
                     <div>
                         <div class="numbers">{{ $pending }}</div>
                         <div class="cardName">Pending</div>
@@ -99,7 +99,7 @@
                     <div class="iconBx"><ion-icon name="time-outline"></ion-icon></div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-status="ditolak">
                     <div>
                         <div class="numbers">{{ $ditolak }}</div>
                         <div class="cardName">Ditolak</div>
@@ -108,33 +108,71 @@
                 </div>
             </div>
 
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const cards = document.querySelectorAll('.cardBox .card');
+                    const tableRows = document.querySelectorAll('.table-pendaftar tbody tr');
+
+                    function filterRows(status) {
+                        tableRows.forEach(row => {
+                            const rowStatus = row.dataset.status; // asumsikan ada data-status di setiap row
+                            if (status === 'all' || status === rowStatus) {
+                                row.style.display = '';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        });
+                    }
+
+                    cards.forEach(card => {
+                        card.addEventListener('click', () => {
+                            // Hapus class active dari semua card
+                            cards.forEach(c => c.classList.remove('active'));
+                            // Tambahkan class active ke card yang diklik
+                            card.classList.add('active');
+
+                            const status = card.getAttribute('data-status');
+                            filterRows(status);
+                        });
+                    });
+
+                    // Default tampil semua
+                    filterRows('all');
+                });
+            </script>
+
             <!-- Details -->
             <div class="details">
-                <!-- Table -->
-                <div class="recentPemagang">
+               <!-- List Pendaftar -->
+                <div class="box list-pendaftar">
                     <div class="cardHeader">
                         <h2>List Pendaftar</h2>
                     </div>
-                    <table>
+                    <table class="table-pendaftar">
                         <thead>
                             <tr>
-                                <td>Nama</td>
-                                <td>Instansi</td>
-                                <td>CV</td>
-                                <td>Status</td>
+                                <th>Nama</th>
+                                <th>Instansi</th>
+                                <th>CV</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($pendaftar as $item)
-                                <tr>
+                                <tr data-status="{{ strtolower($item->status ?? 'pending') }}">
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->instansi }}</td>
-                                    <td><a href="{{ asset('storage/' . $item->cv) }}" target="_blank">📄 Lihat CV</a></td>
+                                    <td>
+                                        <a href="{{ asset('storage/' . $item->cv) }}" target="_blank">
+                                            📄 Lihat CV
+                                        </a>
+                                    </td>
                                     <td>
                                         <form action="{{ route('admin.updateStatus', $item->id) }}" method="POST">
-                                        @csrf
-                                        @method('PATCH')
-                                            <select name="status" onchange="this.form.submit()" class="px-2 py-1 bg-gray-100 rounded">
+                                            @csrf
+                                            @method('PATCH')
+                                            <select name="status" onchange="this.form.submit()">
                                                 <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}>Pending</option>
                                                 <option value="diterima" {{ $item->status == 'diterima' ? 'selected' : '' }}>Diterima</option>
                                                 <option value="ditolak" {{ $item->status == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
@@ -147,9 +185,28 @@
                     </table>
                 </div>
 
+
+
+                <script>
+                    document.getElementById('statusFilter').addEventListener('change', function () {
+                        const selected = this.value;
+                        const rows = document.querySelectorAll('tbody tr');
+
+                        rows.forEach(row => {
+                            const status = row.getAttribute('data-status');
+                            if (selected === 'all' || status === selected) {
+                                row.style.display = '';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        });
+                    });
+                </script>
+
+
                 <!-- Recent -->
                 <div class="recentTerbaru">
-                    <div class="cardHeader"><h2>Daftar Terbaru</h2></div>
+                    <div class="cardHeader2"><h2>Daftar Terbaru</h2></div>
                     <table>
                         @foreach ($recent as $item)
                             <tr>
