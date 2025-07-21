@@ -152,6 +152,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+  background-color: white;
+  z-index: calc(1);
 }
 
 .toggle {
@@ -220,6 +222,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 30px;
+  margin-top: 60px;
 }
 
 .cardBox .card {

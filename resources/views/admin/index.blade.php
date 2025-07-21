@@ -38,11 +38,11 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin.pendaftar') }}">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
-                        <span class="title">Daftar Pemagang</span>
+                        <span class="title">List Pendaftar</span>
                     </a>
                 </li>
 
@@ -113,7 +113,7 @@
                 <!-- Table -->
                 <div class="recentPemagang">
                     <div class="cardHeader">
-                        <h2>Daftar Pemagang</h2>
+                        <h2>List Pendaftar</h2>
                     </div>
                     <table>
                         <thead>

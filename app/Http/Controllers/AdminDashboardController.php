@@ -39,29 +39,64 @@ class AdminDashboardController extends Controller
      */
     public function updateStatus(Request $request, $id)
     {
+        // ✅ Validasi status yang dikirim
         $request->validate([
             'status' => 'required|in:pending,diterima,ditolak',
         ]);
 
-        $pendaftar = Pendaftaran::findOrFail($id);
-        $pendaftar->status = $request->status;
-        $pendaftar->save();
+        try {
+            // ✅ Temukan data pendaftar berdasarkan ID
+            $pendaftar = Pendaftaran::findOrFail($id);
 
-        // Send email when status is 'diterima'
-        if ($request->status === 'diterima') {
-            try {
-                // Direct email sending using the pendaftar's email
-                Mail::to($pendaftar->email)->send(new PendaftaranDiterima($pendaftar));
+            // ✅ Update status
+            $pendaftar->status = $request->status;
+            $pendaftar->save();
 
-                Log::info('Email sent successfully to: ' . $pendaftar->email);
-
-                return back()->with('success', 'Status berhasil diperbarui dan email telah dikirim.');
-            } catch (\Exception $e) {
-                Log::error('Failed to send email: ' . $e->getMessage());
-                return back()->with('success', 'Status berhasil diperbarui, namun gagal mengirim email.');
+            // ✅ Kirim email jika status diterima
+            if ($request->status === 'diterima') {
+                try {
+                    Mail::to($pendaftar->email)->send(new PendaftaranDiterima($pendaftar));
+                    Log::info('Email berhasil dikirim ke: ' . $pendaftar->email);
+                } catch (\Exception $e) {
+                    Log::error('Gagal mengirim email: ' . $e->getMessage());
+                }
             }
-        }
 
-        return back()->with('success', 'Status berhasil diperbarui.');
+            // ✅ Kalau request-nya dari JavaScript (AJAX), balas JSON
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Status berhasil diperbarui.'
+                ]);
+            }
+
+            // ✅ Kalau bukan AJAX, redirect biasa
+            return back()->with('success', 'Status berhasil diperbarui.');
+
+        } catch (\Exception $e) {
+            Log::error('Gagal update status: ' . $e->getMessage());
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Terjadi kesalahan saat mengubah status.'
+                ], 500);
+            }
+
+            return back()->with('error', 'Terjadi kesalahan saat mengubah status.');
+        }
+    }
+
+
+
+    /**
+     * Tampilkan daftar pendaftar
+     */
+    public function listPendaftar()
+    {
+        $pendaftar = \App\Models\Pendaftaran::latest()->get();
+
+        return view('admin.list-pendaftar', compact('pendaftar'));
+
     }
 }
