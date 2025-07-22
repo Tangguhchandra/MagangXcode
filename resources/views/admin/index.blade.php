@@ -67,7 +67,21 @@
             <!-- Topbar -->
             <div class="topbar">
                 <div class="toggle"><ion-icon name="menu-outline"></ion-icon></div>
-                <div class="search"><label><input type="text" placeholder="Search here"><ion-icon name="search-outline"></ion-icon></label></div>
+                <div class="search">
+            <form id="searchForm" action="{{ route('admin.dashboard') }}" method="GET">
+                <label>
+                <input 
+                    type="text" 
+                    name="search" 
+                    id="searchInput"
+                    placeholder="Cari nama..." 
+                    value="{{ request('search') }}"
+                    autocomplete="off"
+                >
+                <ion-icon name="search-outline"></ion-icon>
+                </label>
+            </form>
+            </div>
                 <div class="user"><img src="{{ asset('assets/imgs/customer01.jpg') }}" alt="User"></div>
             </div>
 
@@ -241,6 +255,20 @@
     navigation.classList.toggle("active");
     main.classList.toggle("active");
   };
+
+   const searchInput = document.getElementById('searchInput');
+  const searchForm = document.getElementById('searchForm');
+  let timer;
+
+  searchInput.addEventListener('input', function () {
+    clearTimeout(timer); // Reset timer setiap kali user ngetik
+    timer = setTimeout(() => {
+      searchForm.submit(); // Submit otomatis setelah user berhenti ngetik 0.5 detik
+    }, 500); // 500ms jeda ketik
+  });
+
+
+
 </script>
 </body>
 </html>

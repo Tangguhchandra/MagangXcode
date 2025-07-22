@@ -14,8 +14,8 @@
     </style>
 
     <!-- Ionicons CDN -->
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </head>
 
@@ -70,13 +70,27 @@
             <!-- Topbar -->
             <div class="topbar">
                 <div class="toggle"><ion-icon name="menu-outline"></ion-icon></div>
-                <div class="search"><label><input type="text" placeholder="Search here"><ion-icon name="search-outline"></ion-icon></label></div>
+                <div class="search">
+                    <form id="searchForm" action="{{ route('admin.pendaftar') }}" method="GET">
+                        <label>
+                            <input 
+                                type="text" 
+                                name="search" 
+                                id="searchInput"
+                                placeholder="Cari nama..." 
+                                value="{{ request('search') }}"
+                                autocomplete="off"
+                            >
+                            <ion-icon name="search-outline"></ion-icon>
+                        </label>
+                    </form>
+                </div>
                 <div class="user"><img src="{{ asset('assets/imgs/customer01.jpg') }}" alt="User"></div>
             </div>
 
             <!-- CARD -->
             <div class="card-container">
-                @foreach ($pendaftars as $item)
+                @foreach ($pendaftar as $item)
                     <div class="pendaftar-card">
                         <h3>{{ $item->nama }}</h3>
                         <p><strong>Instansi:</strong> {{ $item->instansi }}</p>
@@ -92,7 +106,6 @@
                             data-id="{{ $item->id }}">
                             Detail
                         </button>
-
                     </div>
                 @endforeach
             </div>
@@ -169,8 +182,6 @@
             </div>
         </div>
     </div>
-
-
 
         </div>
     </div>

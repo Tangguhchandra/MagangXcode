@@ -11,11 +11,17 @@ use Illuminate\Support\Facades\Log;
 class AdminDashboardController extends Controller
 {
     /**
-     * Tampilkan dashboard admin
+     * Tampilkan dashboard admin dengan fitur search
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pendaftar = Pendaftaran::all();
+        $query = Pendaftaran::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $query->where('nama', 'like', '%' . $request->search . '%');
+        }
+
+        $pendaftar = $query->get();
         $recent = Pendaftaran::latest()->take(5)->get();
         $total = $pendaftar->count();
         $diterima = $pendaftar->where('status', 'diterima')->count();
@@ -45,7 +51,6 @@ class AdminDashboardController extends Controller
 
         try {
             $pendaftar = Pendaftaran::findOrFail($id);
-
             $pendaftar->status = $request->status;
             $pendaftar->save();
 
@@ -80,20 +85,29 @@ class AdminDashboardController extends Controller
         }
     }
 
-
-
     /**
-     * Tampilkan daftar pendaftar
+     * Tampilkan daftar pendaftar dengan fitur search
      */
-    public function listPendaftar()
+    public function listPendaftar(Request $request)
     {
-        $pendaftars = Pendaftaran::latest()->get();
+        $search = $request->input('search');
 
-        return view('admin.list-pendaftar', compact('pendaftars'));
+        $pendaftar = Pendaftaran::query()
+            ->when($search, function ($query, $search) {
+                $query->where('nama', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->get();
+
+        return view('admin.list-pendaftar', compact('pendaftar'));
     }
 
+    /**
+     * Ambil detail pendaftar untuk modal detail
+     */
     public function showDetail($id)
     {
         $pendaftar = Pendaftaran::findOrFail($id);
-    return response()->json($pendaftar);    }
+        return response()->json($pendaftar);
+    }
 }
