@@ -50,3 +50,6 @@ Route::middleware('auth')->group(function () {
     });
 });
 // Logout
+
+// admin dashboard
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth')->name('admin.dashboard');

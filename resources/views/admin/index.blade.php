@@ -28,20 +28,18 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
+                <!-- Dashboard -->
+                <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('admin.dashboard') }}">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
 
-                <li>
+                <!-- List Pendaftar -->
+                <li class="{{ request()->is('admin/pendaftar*') ? 'active' : '' }}">
                     <a href="{{ route('admin.pendaftar') }}">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
+                        <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
                         <span class="title">List Pendaftar</span>
                     </a>
                 </li>
