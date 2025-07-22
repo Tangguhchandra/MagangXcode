@@ -113,6 +113,9 @@ button[type="submit"]:hover {
 
 .alert-error li {
     margin-bottom: 5px;
+    margin-left: -20px;
+    list-style-type: none;
+
 }
 
 .alert-success {
