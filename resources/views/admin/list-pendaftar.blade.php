@@ -360,6 +360,18 @@ document.addEventListener('keydown', function(event) {
  closeModal();
  }
 });
+
+   const searchInput = document.getElementById('searchInput');
+  const searchForm = document.getElementById('searchForm');
+  let timer;
+
+  searchInput.addEventListener('input', function () {
+    clearTimeout(timer); // Reset timer setiap kali user ngetik
+    timer = setTimeout(() => {
+      searchForm.submit(); // Submit otomatis setelah user berhenti ngetik 0.5 detik
+    }, 500); // 500ms jeda ketik
+  });
+
 </script>
 
 </body>
