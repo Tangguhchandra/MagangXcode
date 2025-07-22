@@ -104,7 +104,8 @@
             <!-- CARD -->
             <div class="card-container" style="max-height: 90vh; overflow-y: auto; margin-top: 10px;">
 
-                @foreach ($pendaftars as $item)
+                @foreach ($pendaftar as $item)
+
                     <div class="pendaftar-card"  >
                         <h3>{{ $item->nama }}</h3>
                         <p><strong>Instansi:</strong> {{ $item->instansi }}</p>
