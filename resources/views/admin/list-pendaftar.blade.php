@@ -11,12 +11,26 @@
         .status.delivered { background: #28a745; color: #fff; padding: 4px 8px; border-radius: 4px; }
         .status.pending { background: #ffc107; color: #000; padding: 4px 8px; border-radius: 4px; }
         .status.return { background: #dc3545; color: #fff; padding: 4px 8px; border-radius: 4px; }
+        .card-container::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .card-container::-webkit-scrollbar-thumb {
+        background-color: rgba(0,0,0,0.2);
+        border-radius: 4px;
+    }
+
+    .card-container {
+        scroll-behavior: smooth;
+    }
+
     </style>
 
     <!-- Ionicons CDN -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+    
 </head>
 
 <body>
@@ -78,9 +92,10 @@
             </div>
 
             <!-- CARD -->
-            <div class="card-container">
+            <div class="card-container" style="max-height: 90vh; overflow-y: auto; margin-top: 10px;">
+
                 @foreach ($pendaftars as $item)
-                    <div class="pendaftar-card">
+                    <div class="pendaftar-card"  >
                         <h3>{{ $item->nama }}</h3>
                         <p><strong>Instansi:</strong> {{ $item->instansi }}</p>
                         <p><strong>Email:</strong> {{ $item->email }}</p>

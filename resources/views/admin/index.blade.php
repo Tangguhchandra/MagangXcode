@@ -149,6 +149,7 @@
                     <div class="cardHeader">
                         <h2>List Pendaftar</h2>
                     </div>
+                    <div class="table-wrapper">
                     <table class="table-pendaftar">
                         <thead>
                             <tr>
@@ -183,6 +184,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
 
 
@@ -207,6 +209,7 @@
                 <!-- Recent -->
                 <div class="recentTerbaru">
                     <div class="cardHeader2"><h2>Daftar Terbaru</h2></div>
+                    <div class="recent-scroll-wrapper">
                     <table>
                         @foreach ($recent as $item)
                             <tr>
@@ -219,6 +222,7 @@
                             </tr>
                         @endforeach
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
