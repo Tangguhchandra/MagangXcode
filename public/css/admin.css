@@ -605,6 +605,13 @@ th {
     border-color: #dc3545;
 }
 
+/* Saat dropdown status diklik (focus), warnanya selalu abu-abu */
+.table-pendaftar select[name="status"]:focus {
+    background-color: #e2e2e2 !important;
+    color: #222 !important;
+    border-color: #bbb !important;
+}
+
 .table-pendaftar tbody tr:hover {
     background-color: #e2e2e2;
     cursor: default;

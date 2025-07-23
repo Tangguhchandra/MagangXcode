@@ -248,6 +248,7 @@
 
                         if (data.success) {
                             showToast('success', data.message || 'Status berhasil diperbarui');
+                            location.reload();
                         } else {
                             showToast('error', data.message || 'Gagal memperbarui status');
                         }

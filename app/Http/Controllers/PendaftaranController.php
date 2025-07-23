@@ -6,6 +6,7 @@ use App\Http\Requests\PendaftarRequest;
 use App\Models\Pendaftaran;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class PendaftaranController extends Controller
 {
@@ -13,6 +14,7 @@ class PendaftaranController extends Controller
     {
         return view('pendaftaran.form');
     }
+
     public function store(PendaftarRequest $request)
     {
         try {
@@ -20,7 +22,7 @@ class PendaftaranController extends Controller
                 return redirect()->back()->withErrors(['error' => 'Anda harus login terlebih dahulu.']);
             }
 
-            if(!User::where('email', $request->email)->exists()) {
+            if (!User::where('email', $request->email)->exists()) {
                 return redirect()->back()->withErrors(['error' => 'Email tidak terdaftar.']);
             }
 
@@ -43,10 +45,26 @@ class PendaftaranController extends Controller
                     'portofolio' => $portofolio,
                 ]
             ));
+
             return view('pendaftaran.success')->with('pendaftaran', $pendaftaran);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors([
                 'error' => 'Terjadi kesalahan saat menyimpan data: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+    // hapus data pendaftaran
+    public function destroy($id)
+    {
+        try {
+            $pendaftaran = Pendaftaran::findOrFail($id);
+            $pendaftaran->delete();
+
+            return redirect()->back()->with('success', 'Data pendaftar berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([
+                'error' => 'Gagal menghapus data: ' . $e->getMessage()
             ]);
         }
     }
