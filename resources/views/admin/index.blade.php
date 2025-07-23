@@ -272,8 +272,28 @@
     }, 500); // 500ms jeda ketik
   });
 
+    document.querySelectorAll('select[name="status"]').forEach(select => {
+        function updateColorClass(el) {
+            el.classList.remove('pending', 'diterima', 'ditolak');
+            const val = el.value;
+            el.classList.add(val);
+        }
 
+        updateColorClass(select); // initial
+        select.addEventListener('change', function () {
+            updateColorClass(this);
+        });
+    });
 
 </script>
+
+@if (session('success'))
+    <div class="toast toast-success">{{ session('success') }}</div>
+@endif
+
+@if (session('error'))
+    <div class="toast toast-error">{{ session('error') }}</div>
+@endif
+
 </body>
 </html>
