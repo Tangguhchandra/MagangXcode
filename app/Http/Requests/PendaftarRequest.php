@@ -25,7 +25,6 @@ class PendaftarRequest extends FormRequest
     public function rules(): array
     {
          return [
-            'email' => User::where('email', $this->email)->exists() ? 'required|email|regex:/@gmail\.com$/|unique:users,email' : 'required|email|regex:/@gmail\.com$/',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'instansi' => 'required|string|max:255',
             'mulai_magang' => 'required|date',

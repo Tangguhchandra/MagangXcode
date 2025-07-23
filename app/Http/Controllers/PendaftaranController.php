@@ -36,6 +36,8 @@ class PendaftaranController extends Controller
                 $validatedData,
                 [
                     'user_id' => Auth::id(),
+                    'nama' => Auth::user()->name,
+                    'email' => Auth::user()->email,
                     'foto' => $foto,
                     'cv' => $cv,
                     'portofolio' => $portofolio,
