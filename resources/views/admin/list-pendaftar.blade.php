@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>List Pendaftar</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/listpendaftar.css') }}">
@@ -29,6 +29,8 @@
     <!-- Ionicons CDN -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
 </head>
 
@@ -102,28 +104,49 @@
             </div>
 
             <!-- CARD -->
-            <div class="card-container" style="max-height: 90vh; overflow-y: auto; margin-top: 10px;">
+           <!-- Card Container -->
+<div class="card-container" style="max-height: 90vh; overflow-y: auto; margin-top: 10px;">
+    @foreach ($pendaftar as $item)
+        <div class="pendaftar-card" style="position: relative;">
 
-                @foreach ($pendaftar as $item)
+            <!-- Tombol Delete Icon -->
+            <form 
+                action="{{ route('pendaftar.destroy', $item->id) }}" 
+                method="POST" 
+                onsubmit="return confirm('Yakin ingin menghapus data ini?')"
+                style="position: absolute; top: 10px; right: 10px;">
+                
+                @csrf
+                @method('DELETE')
+                
+                <button 
+                    type="submit" 
+                    style="background: transparent; border: none; cursor: pointer;">
+                    <i class="fas fa-trash" style="color: #9d0000; font-size: 18px;"></i>
+                </button>
+            </form>
 
-                    <div class="pendaftar-card"  >
-                        <h3>{{ $item->nama }}</h3>
-                        <p><strong>Instansi:</strong> {{ $item->instansi }}</p>
-                        <p><strong>Email:</strong> {{ $item->email }}</p>
-                        <p><strong>Status:</strong> 
-                            <span class="status {{ $item->status ?? 'pending' }}">
-                                {{ ucfirst($item->status ?? 'pending') }}
-                            </span>
-                        </p>
-                        <button 
-                            type="button" 
-                            class="btn-detail" 
-                            data-id="{{ $item->id }}">
-                            Detail
-                        </button>
-                    </div>
-                @endforeach
-            </div>
+            <!-- Isi Card -->
+            <h3>{{ $item->nama }}</h3>
+            <p><strong>Instansi:</strong> {{ $item->instansi }}</p>
+            <p><strong>Email:</strong> {{ $item->email }}</p>
+            <p><strong>Status:</strong> 
+                <span class="status {{ $item->status ?? 'pending' }}">
+                    {{ ucfirst($item->status ?? 'pending') }}
+                </span>
+            </p>
+            <button 
+                type="button" 
+                class="btn-detail" 
+                data-id="{{ $item->id }}">
+                Detail
+            </button>
+        </div>
+    @endforeach
+    
+</div>
+
+
 
             <!-- Modal -->
     <!-- Modal -->

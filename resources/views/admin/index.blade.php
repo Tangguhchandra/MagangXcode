@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+    
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <style>
@@ -99,39 +100,40 @@
             </div>
 
             <!-- Cards -->
-            <div class="cardBox">
-                <div class="card active" data-status="all">
-                    <div>
-                        <div class="numbers">{{ $total }}</div>
-                        <div class="cardName">Total Pendaftar</div>
-                    </div>
-                    <div class="iconBx"><ion-icon name="person-add-outline"></ion-icon></div>
-                </div>
+<div class="cardBox">
+    <div class="card active" data-status="all">
+        <div>
+            <div class="numbers" id="total-count">{{ $total }}</div>
+            <div class="cardName">Total Pendaftar</div>
+        </div>
+        <div class="iconBx"><ion-icon name="person-add-outline"></ion-icon></div>
+    </div>
 
-                <div class="card" data-status="diterima">
-                    <div>
-                        <div class="numbers">{{ $diterima }}</div>
-                        <div class="cardName">Diterima</div>
-                    </div>
-                    <div class="iconBx"><ion-icon name="checkmark-circle-outline"></ion-icon></div>
-                </div>
+    <div class="card" data-status="diterima">
+        <div>
+            <div class="numbers" id="diterima-count">{{ $diterima }}</div>
+            <div class="cardName">Diterima</div>
+        </div>
+        <div class="iconBx"><ion-icon name="checkmark-circle-outline"></ion-icon></div>
+    </div>
 
-                <div class="card" data-status="pending">
-                    <div>
-                        <div class="numbers">{{ $pending }}</div>
-                        <div class="cardName">Pending</div>
-                    </div>
-                    <div class="iconBx"><ion-icon name="time-outline"></ion-icon></div>
-                </div>
+    <div class="card" data-status="pending">
+        <div>
+            <div class="numbers" id="pending-count">{{ $pending }}</div>
+            <div class="cardName">Pending</div>
+        </div>
+        <div class="iconBx"><ion-icon name="time-outline"></ion-icon></div>
+    </div>
 
-                <div class="card" data-status="ditolak">
-                    <div>
-                        <div class="numbers">{{ $ditolak }}</div>
-                        <div class="cardName">Ditolak</div>
-                    </div>
-                    <div class="iconBx"><ion-icon name="close-circle-outline"></ion-icon></div>
-                </div>
-            </div>
+    <div class="card" data-status="ditolak">
+        <div>
+            <div class="numbers" id="ditolak-count">{{ $ditolak }}</div>
+            <div class="cardName">Ditolak</div>
+        </div>
+        <div class="iconBx"><ion-icon name="close-circle-outline"></ion-icon></div>
+    </div>
+</div>
+
 
 
             <script>
@@ -175,48 +177,104 @@
                         <h2>List Pendaftar</h2>
                     </div>
                     <div class="table-wrapper">
-                        <table class="table-pendaftar">
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Instansi</th>
-                                    <th>CV</th>
-                                    <th>Status</th>
+                    <table class="table-pendaftar">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Instansi</th>
+                                <th>CV</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pendaftar as $item)
+                                <tr data-status="{{ strtolower($item->status ?? 'pending') }}">
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->instansi }}</td>
+                                    <td>
+                                        <a href="{{ asset('storage/' . $item->cv) }}" target="_blank">
+                                            📄 Lihat CV
+                                        </a>
+                                    </td>
+                                <td>
+                                    <form class="form-status" data-id="{{ $item->id }}">
+                                        @csrf
+                                        @method('PATCH')
+                                        <select name="status" onchange="submitStatusViaAjax(this)">
+                                            <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                            <option value="diterima" {{ $item->status == 'diterima' ? 'selected' : '' }}>Diterima</option>
+                                            <option value="ditolak" {{ $item->status == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                        </select>
+                                    </form>
+                                </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($pendaftar as $item)
-                                    <tr data-status="{{ strtolower($item->status ?? 'pending') }}">
-                                        <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->instansi }}</td>
-                                        <td>
-                                            <a href="{{ asset('storage/' . $item->cv) }}" target="_blank">
-                                                📄 Lihat CV
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <form action="{{ route('admin.updateStatus', $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('PATCH')
-                                                <select name="status" onchange="this.form.submit()">
-                                                    <option value="pending"
-                                                        {{ $item->status == 'pending' ? 'selected' : '' }}>Pending
-                                                    </option>
-                                                    <option value="diterima"
-                                                        {{ $item->status == 'diterima' ? 'selected' : '' }}>Diterima
-                                                    </option>
-                                                    <option value="ditolak"
-                                                        {{ $item->status == 'ditolak' ? 'selected' : '' }}>Ditolak
-                                                    </option>
-                                                </select>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                            @endforeach
+                        </tbody>
+                    </table>
                     </div>
                 </div>
+
+                <!-- Loading -->
+                <div id="status-loader-popup">
+                <div class="popup-box">
+                    <div class="spinner"></div>
+                    <p>Mengubah status...</p>
+                </div>
+                </div>
+
+                
+                <!-- JS Loading -->
+                <script>
+                function submitStatusViaAjax(selectElement) {
+                    const form = selectElement.closest('.form-status');
+                    const id = form.dataset.id;
+                    const newStatus = selectElement.value;
+                    const popup = document.getElementById('status-loader-popup');
+
+                    // Tampilkan loading popup
+                    popup.style.display = 'flex';
+
+                    fetch(`{{ route('admin.updateStatus', ':id') }}`.replace(':id', id), {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({ status: newStatus })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        popup.style.display = 'none';
+
+                        if (data.success) {
+                            showToast('success', data.message || 'Status berhasil diperbarui');
+                        } else {
+                            showToast('error', data.message || 'Gagal memperbarui status');
+                        }
+                    })
+                    .catch(error => {
+                        popup.style.display = 'none';
+                        showToast('error', 'Terjadi kesalahan saat update.');
+                    });
+                }
+
+                </script>
+
+                <!-- JS Toast Notification -->
+                <script>
+                function showToast(type, message) {
+                    const toast = document.createElement('div');
+                    toast.className = `toast toast-${type}`;
+                    toast.innerText = message;
+                    document.body.appendChild(toast);
+
+                    setTimeout(() => toast.classList.add('show'), 100);
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                        setTimeout(() => toast.remove(), 500);
+                    }, 3000);
+                }
+                </script>
 
 
 
@@ -262,7 +320,7 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Scripts Nav,Search,Select Dll -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script>
@@ -286,13 +344,30 @@
         const searchForm = document.getElementById('searchForm');
         let timer;
 
-        searchInput.addEventListener('input', function() {
-            clearTimeout(timer); // Reset timer setiap kali user ngetik
-            timer = setTimeout(() => {
-                searchForm.submit(); // Submit otomatis setelah user berhenti ngetik 0.5 detik
-            }, 500); // 500ms jeda ketik
+  searchInput.addEventListener('input', function () {
+    clearTimeout(timer); // Reset timer setiap kali user ngetik
+    timer = setTimeout(() => {
+      searchForm.submit(); // Submit otomatis setelah user berhenti ngetik 0.5 detik
+    }, 500); // 500ms jeda ketik
+  });
+
+    document.querySelectorAll('select[name="status"]').forEach(select => {
+        function updateColorClass(el) {
+            el.classList.remove('pending', 'diterima', 'ditolak');
+            const val = el.value;
+            el.classList.add(val);
+        }
+
+        updateColorClass(select); // initial
+        select.addEventListener('change', function () {
+            updateColorClass(this);
         });
-    </script>
+    });
+
+</script>
+
+
+
 </body>
 
 </html>

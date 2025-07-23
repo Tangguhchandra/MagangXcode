@@ -60,18 +60,17 @@ body {
 
 /* HOVER EFFECT */
 
-
 /* OPSIONAL: efek bayangan hover */
 .navigation ul li:hover a::before,
 .navigation ul li:hover a::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  border-radius: 50%;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 /* MENU ATAS (JUDUL) */
@@ -81,18 +80,18 @@ body {
 }
 
 .navigation ul li a {
-  position: relative;
-  display: flex;
-  width: 100%;
-  text-decoration: none;
-  color: var(--white);
+    position: relative;
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    color: var(--white);
 }
 
 .navigation ul li a .icon {
-  min-width: 60px;
-  height: 60px;
-  line-height: 75px;
-  text-align: center;
+    min-width: 60px;
+    height: 60px;
+    line-height: 75px;
+    text-align: center;
 }
 
 .navigation ul li a .icon ion-icon {
@@ -100,43 +99,43 @@ body {
 }
 
 .navigation ul li a .title {
-  padding: 0 10px;
-  height: 60px;
-  line-height: 60px;
-  white-space: nowrap;
-  text-align: start;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+    text-align: start;
 }
 
 /* =============== ACTIVE NAV ITEM ================ */
 .navigation ul li.active {
-  background-color: var(--white);
+    background-color: var(--white);
 }
 
 .navigation ul li.active a {
-  color: var(--red);
-  font-weight: 500;
+    color: var(--red);
+    font-weight: 500;
 }
 
 .navigation ul li.active a::before,
 .navigation ul li.active a::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  border-radius: 50%;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 .navigation ul li.active a::before {
-  top: -50px;
-  box-shadow: 35px 35px 0 10px var(--white);
+    top: -50px;
+    box-shadow: 35px 35px 0 10px var(--white);
 }
 
 .navigation ul li.active a::after {
-  bottom: -50px;
-  box-shadow: 35px -35px 0 10px var(--white);
+    bottom: -50px;
+    box-shadow: 35px -35px 0 10px var(--white);
 }
 
 /* ===================== Main Cuyyy ===================== */
@@ -568,4 +567,126 @@ th {
         right: 0;
         left: initial;
     }
+}
+
+
+/* Gaya umum untuk dropdown */
+.table-pendaftar select[name="status"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid #ccc;
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 12px;
+    transition: 0.3s;
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='10' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7L10 12L15 7' stroke='%23666' stroke-width='2'/%3E%3C/svg%3E");
+    cursor: pointer;
+}
+
+/* Warna berdasarkan status yang dipilih */
+.table-pendaftar select[name="status"].pending {
+    background-color: #ffeeba;
+    color: #856404;
+    border-color: #ffc107;
+}
+.table-pendaftar select[name="status"].diterima {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #28a745;
+}
+.table-pendaftar select[name="status"].ditolak {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #dc3545;
+}
+
+.table-pendaftar tbody tr:hover {
+    background-color: #e2e2e2;
+    cursor: default;
+}
+
+.table-pendaftar select[name="status"] {
+    transition: all 0.3s ease-in-out;
+}
+
+.table-wrapper::-webkit-scrollbar,
+.recent-scroll-wrapper::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb,
+.recent-scroll-wrapper::-webkit-scrollbar-thumb {
+    background-color: #0b0b0b2f;
+    border-radius: 10px;
+}
+
+/* ================= Toast Notifications ================= */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    animation: fadeout 4s forwards;
+}
+
+.toast-success {
+    background-color: #28a745;
+}
+
+.toast-error {
+    background-color: #dc3545;
+}
+
+@keyframes fadeout {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+}
+
+
+/* ================= Loading ================= */
+#status-loader-popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.popup-box {
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  text-align: center;
+}
+.popup-box p {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 4px solid #ddd;
+  border-top: 4px solid #a00;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

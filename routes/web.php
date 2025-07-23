@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/pendaftar', [AdminDashboardController::class, 'listPendaftar'])->name('admin.pendaftar');
         Route::get('/admin/pendaftar/{id}/detail', [AdminDashboardController::class, 'showDetail']);
         Route::patch('/admin/update-status/{id}', [AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
+        Route::delete('/pendaftar/{id}', [PendaftaranController::class, 'destroy'])->name('pendaftar.destroy');
+
     });
 });
 // Logout
