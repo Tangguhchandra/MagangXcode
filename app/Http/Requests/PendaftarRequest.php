@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PendaftarRequest extends FormRequest
@@ -24,8 +25,7 @@ class PendaftarRequest extends FormRequest
     public function rules(): array
     {
          return [
-            'nama' => 'required|string|max:255',
-            'email' => 'required|email|regex:/@gmail\.com$/i|unique:pendaftarans,email',
+            'email' => User::where('email', $this->email)->exists() ? 'required|email|regex:/@gmail\.com$/|unique:users,email' : 'required|email|regex:/@gmail\.com$/',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'instansi' => 'required|string|max:255',
             'mulai_magang' => 'required|date',
@@ -40,14 +40,6 @@ class PendaftarRequest extends FormRequest
     public function messages(): array 
     {
         return [
-            'nama.required' => 'Nama wajib diisi.',
-            'nama.string' => 'Nama harus berupa teks.',
-            'nama.max' => 'Nama maksimal 255 karakter.',
-            
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'email.regex' => 'Email harus menggunakan domain @gmail.com.',
-            'email.unique' => 'Email sudah terdaftar.',
             
             'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
             'jenis_kelamin.in' => 'Jenis kelamin harus Laki-laki atau Perempuan.',
