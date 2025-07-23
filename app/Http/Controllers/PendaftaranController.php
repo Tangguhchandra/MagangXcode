@@ -50,5 +50,13 @@ class PendaftaranController extends Controller
         ]);
     }
 }
+public function destroy($id)
+{
+    $pendaftar = Pendaftaran::findOrFail($id);
+    $pendaftar->delete();
+
+    return redirect()->back()->with('success', 'Data pendaftar berhasil dihapus.');
+}
+
 
 }

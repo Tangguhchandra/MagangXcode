@@ -60,18 +60,17 @@ body {
 
 /* HOVER EFFECT */
 
-
 /* OPSIONAL: efek bayangan hover */
 .navigation ul li:hover a::before,
 .navigation ul li:hover a::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  border-radius: 50%;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 /* MENU ATAS (JUDUL) */
@@ -81,18 +80,18 @@ body {
 }
 
 .navigation ul li a {
-  position: relative;
-  display: flex;
-  width: 100%;
-  text-decoration: none;
-  color: var(--white);
+    position: relative;
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    color: var(--white);
 }
 
 .navigation ul li a .icon {
-  min-width: 60px;
-  height: 60px;
-  line-height: 75px;
-  text-align: center;
+    min-width: 60px;
+    height: 60px;
+    line-height: 75px;
+    text-align: center;
 }
 
 .navigation ul li a .icon ion-icon {
@@ -100,43 +99,43 @@ body {
 }
 
 .navigation ul li a .title {
-  padding: 0 10px;
-  height: 60px;
-  line-height: 60px;
-  white-space: nowrap;
-  text-align: start;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+    text-align: start;
 }
 
 /* =============== ACTIVE NAV ITEM ================ */
 .navigation ul li.active {
-  background-color: var(--white);
+    background-color: var(--white);
 }
 
 .navigation ul li.active a {
-  color: var(--red);
-  font-weight: 500;
+    color: var(--red);
+    font-weight: 500;
 }
 
 .navigation ul li.active a::before,
 .navigation ul li.active a::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  border-radius: 50%;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 .navigation ul li.active a::before {
-  top: -50px;
-  box-shadow: 35px 35px 0 10px var(--white);
+    top: -50px;
+    box-shadow: 35px 35px 0 10px var(--white);
 }
 
 .navigation ul li.active a::after {
-  bottom: -50px;
-  box-shadow: 35px -35px 0 10px var(--white);
+    bottom: -50px;
+    box-shadow: 35px -35px 0 10px var(--white);
 }
 
 /* ===================== Main Cuyyy ===================== */
