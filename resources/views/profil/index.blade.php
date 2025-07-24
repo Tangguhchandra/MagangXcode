@@ -41,7 +41,7 @@
         </div>
     @else
         <div class="profile-info">
-            <div class="profile-avatar" style="background-color: #ccc; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+            <div class="profile-default">
                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
             </div>
             <h2 class="profile-name">{{ Auth::user()->name ?? 'Member' }}</h2>
@@ -159,7 +159,9 @@
                         </div>
                     @endif
                 </div>
-                <a href="{{ route('profil.edit', $user->id) }}" class="btn btn-primary">Edit Profil</a>
+                @if ($pendaftaran->isNotEmpty())
+                        <a href="{{ route('profil.edit', $user->id) }}" class="btn btn-primary">Edit Profile</a>
+                @endif
             </div>
             <!-- Action Buttons -->
         </div>
