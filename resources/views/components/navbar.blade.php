@@ -6,9 +6,9 @@
     <!-- Tengah: Menu Navigasi -->
     <ul class="nav-links" style="position: absolute; left: 50%; transform: translateX(-50%);">
       <li><a href="{{ route('user.dashboard') }}" class="{{ request()->routeIs('user.dashboard') || request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-      <li><a href="#tentang" class="{{ request()->is('*tentang*') ? 'active' : '' }}">Tentang</a></li>
-      <li><a href="#program" class="{{ request()->is('*program*') ? 'active' : '' }}">Program</a></li>
-      <li><a href="#kontak" class="{{ request()->is('*kontak*') ? 'active' : '' }}">Kontak</a></li>
+      <li><a href="/dashboard#tentang" class="{{ request()->is('*tentang*') ? 'active' : '' }}">Tentang</a></li>
+      <li><a href="/dashboard#program" class="{{ request()->is('*program*') ? 'active' : '' }}">Program</a></li>
+      <li><a href="/dashboard#kontak" class="{{ request()->is('*kontak*') ? 'active' : '' }}">Kontak</a></li>
     </ul>
 
     <!-- Kanan: Ikon Profil & Logout -->
