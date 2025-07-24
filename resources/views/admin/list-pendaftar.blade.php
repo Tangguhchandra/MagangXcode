@@ -242,7 +242,7 @@ fetch(`/admin/pendaftar/${id}/detail`)
     <div class="detail-value">
         ${
             data.foto
-                ? `<a href="/storage/${data.foto}" target="_blank" class="cv-link">Lihat foto</a>`
+                ? `<a href="/storage/${encodeURIComponent(data.foto)}" target="_blank" class="cv-link">Lihat Foto</a>`
                 : '-'
         }
     </div>
@@ -251,7 +251,7 @@ fetch(`/admin/pendaftar/${id}/detail`)
  <div class="detail-item">
  <div class="detail-label">CV:</div>
  <div class="detail-value">
- <a href="/storage/${data.cv}" target="_blank" class="cv-link">Lihat CV</a>
+<a href="/storage/${encodeURIComponent(data.cv)}" target="_blank" class="cv-link">Lihat CV</a>
  </div>
  </div>`;
 
@@ -262,7 +262,7 @@ contentHTML += `
   <div class="detail-value">
     ${
       data.portofolio
-        ? `<a href="/storage/${data.portofolio}" target="_blank" class="cv-link">Lihat</a>`
+        ? `<a href="/storage/${encodeURIComponent(data.portofolio)}" target="_blank" class="cv-link">Lihat CV</a>`
         : '-'
     }
   </div>
