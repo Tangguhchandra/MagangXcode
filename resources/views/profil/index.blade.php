@@ -27,23 +27,29 @@
         <div class="profile-content">
             <!-- Left Section - Profile Info -->
             <div class="profile-card">
-                @foreach ($pendaftaran as $profilPendaftar)
-    <div class="profile-info">
-        <div class="profile-avatar">
-            <img src="{{ asset('storage/' . $profilPendaftar->foto) }}" alt="img">
-        </div>
+    @if ($pendaftaran->isNotEmpty())
+        @php
+            $profilPendaftar = $pendaftaran->first(); // Ambil 1 data saja
+        @endphp
 
-        <h2 class="profile-name">
-            {{ $profilPendaftar->nama ? $profilPendaftar->nama : 'Member' }}
-        </h2>
-
-        <p class="profile-role">
-            {{ $profilPendaftar->email ? $profilPendaftar->email : 'example@gmail.com' }}
-        </p>
-    </div>
-@endforeach
-
+        <div class="profile-info">
+            <div class="profile-avatar">
+                <img src="{{ asset('storage/' . $profilPendaftar->foto) }}" alt="img">
             </div>
+            <h2 class="profile-name">{{ $profilPendaftar->nama ?? 'Member' }}</h2>
+            <p class="profile-role">{{ $profilPendaftar->email ?? 'example@gmail.com' }}</p>
+        </div>
+    @else
+        <div class="profile-info">
+            <div class="profile-avatar" style="background-color: #ccc; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+            </div>
+            <h2 class="profile-name">{{ Auth::user()->name ?? 'Member' }}</h2>
+            <p class="profile-role">{{ Auth::user()->email ?? 'example@gmail.com' }}</p>
+        </div>
+    @endif
+</div>
+
 
             <!-- Right Section - Bio & Details -->
             <div class="bio-card" data-aos="fade-up">
