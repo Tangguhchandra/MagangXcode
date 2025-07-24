@@ -31,6 +31,18 @@ body {
     color: #1a202c;
 }
 
+.profile-default {
+    background-color: #ccc;
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto;
+}
+
 .profile-info .profile-avatar img {
     align-items: center;
 }
