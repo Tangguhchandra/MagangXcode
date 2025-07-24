@@ -183,6 +183,7 @@
                                 <th>Nama</th>
                                 <th>Instansi</th>
                                 <th>CV</th>
+                                <th>portofolio
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -196,7 +197,15 @@
                                             📄 Lihat CV
                                         </a>
                                     </td>
-                                <td>
+                                    <td>
+                                        @if ($item->portofolio)
+                                            <a href="{{ asset('storage/' . $item->portofolio) }}" target="_blank">
+                                            📂 Lihat Portofolio
+                                            </a>
+                                        @else
+                                            <span style="color: gray;">Tidak ada portofolio</span>
+                                         @endif
+                                    </td>
                                     <form class="form-status" data-id="{{ $item->id }}">
                                         @csrf
                                         @method('PATCH')

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfilController extends Controller
 {
@@ -54,35 +55,62 @@ class ProfilController extends Controller
     public function update(Request  $request)
     {
         $user = Pendaftaran::where('user_id', Auth::id())->first();
-        $authName = Auth::user();
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'mulai_magang' => 'required|date',
-            'selesai_magang' => 'required|date|after_or_equal:mulai_magang',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'portofolio' => 'nullable|mimes:pdf,docx,pptx|max:4096',
-        ]);
+    $authUser = Auth::user();
 
+    // Validasi: semua optional agar bisa ubah satu field
+    $request->validate([
+        'nama' => 'nullable|string|max:255',
+        'mulai_magang' => 'nullable|date',
+        'selesai_magang' => 'nullable|date|after_or_equal:mulai_magang',
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'portofolio' => 'nullable|mimes:pdf,docx,pptx|max:4096',
+    ]);
 
-        $data = $request->all();
-    
+    $data = [];
 
-        // Handle file uploads
-        if ($request->hasFile('foto')) {
-            $fotoPath = $request->file('foto')->store('uploads/foto', 'public');
-            $data['foto'] = $fotoPath;
+    // Cek jika ada perubahan per field
+    if ($request->filled('nama')) {
+        $data['nama'] = $request->nama;
+    }
+
+    if ($request->filled('mulai_magang')) {
+        $data['mulai_magang'] = $request->mulai_magang;
+    }
+
+    if ($request->filled('selesai_magang')) {
+        $data['selesai_magang'] = $request->selesai_magang;
+    }
+
+    // Handle upload foto
+    if ($request->hasFile('foto')) {
+        // Hapus file lama jika ada
+        if ($user->foto && Storage::disk('public')->exists($user->foto)) {
+            Storage::disk('public')->delete($user->foto);
         }
-        if ($request->hasFile('portofolio')) {
-            $portofolioPath = $request->file('portofolio')->store('uploads/portofolio', 'public');
-            $data['portofolio'] = $portofolioPath;
+        $data['foto'] = $request->file('foto')->store('uploads/foto', 'public');
+    }
+
+    // Handle upload portofolio
+    if ($request->hasFile('portofolio')) {
+        if ($user->portofolio && Storage::disk('public')->exists($user->portofolio)) {
+            Storage::disk('public')->delete($user->portofolio);
         }
-        
+        $data['portofolio'] = $request->file('portofolio')->store('uploads/portofolio', 'public');
+    }
+
+    // Jika ada data diubah
+    if (!empty($data)) {
         $user->update($data);
-        // dd($data);
-        // Update the user profile
-        $authName->name = $request->nama;
-        $authName->save(); 
-        
+
+        // Sinkronkan nama dengan tabel user jika nama diubah
+        if (isset($data['nama'])) {
+            $authUser->name = $data['nama'];
+            $authUser->save();
+        }
+
         return redirect()->route('profil')->with('success', 'Profil berhasil diperbarui.');
     }
+
+    return redirect()->back()->with('info', 'Tidak ada perubahan yang dilakukan.');
+}
 }
