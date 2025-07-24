@@ -84,13 +84,13 @@ class ProfilController extends Controller
         // Handle upload foto
         if ($request->hasFile('foto')) {
             if ($user->foto) Storage::delete($user->foto);
-            $data['foto'] = $request->file('foto')->store('foto');
+            $data['foto'] = $request->file('foto')->store('foto', 'public');
         }
 
         // Handle upload portofolio jika ada
         if ($request->hasFile('portofolio')) {
             if ($user->portofolio) Storage::delete($user->portofolio);
-            $data['portofolio'] = $request->file('portofolio')->store('portofolio');
+            $data['portofolio'] = $request->file('portofolio')->store('portofolio', 'public');
         }
 
 
