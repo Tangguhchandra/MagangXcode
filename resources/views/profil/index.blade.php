@@ -27,19 +27,22 @@
         <div class="profile-content">
             <!-- Left Section - Profile Info -->
             <div class="profile-card">
-                @foreach ($pendaftaran as $profilPendaftar )
-                    
-                @endforeach
-                <div class="profile-info">
-                    <div class="profile-avatar">
-                        <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=3b82f6&color=fff&rounded=true&size=200"
-                            alt="Profile Picture">
-                    </div>
-                    <h2 class="profile-name">{{ $profilPendaftar->nama ? $profilPendaftar->nama : 'Member' }}</h2>
-                    <p class="profile-role">{{ $profilPendaftar->email ? $profilPendaftar->email : 'example@gmail.com' }}</p>
-                    <!-- Add badges based on user status -->
+                @foreach ($pendaftaran as $profilPendaftar)
+    <div class="profile-info">
+        <div class="profile-avatar">
+            <img src="{{ asset('storage/' . $profilPendaftar->foto) }}" alt="img">
+        </div>
 
-                </div>
+        <h2 class="profile-name">
+            {{ $profilPendaftar->nama ? $profilPendaftar->nama : 'Member' }}
+        </h2>
+
+        <p class="profile-role">
+            {{ $profilPendaftar->email ? $profilPendaftar->email : 'example@gmail.com' }}
+        </p>
+    </div>
+@endforeach
+
             </div>
 
             <!-- Right Section - Bio & Details -->
