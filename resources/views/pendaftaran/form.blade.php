@@ -30,21 +30,20 @@
         <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="form-group">
+            <div class="form-group readonly">
                 <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" name="nama" value="{{ old('nama') }}" required>
-                @error('nama')
-                    <span class="error-text">{{ $message }}</span>
-                @enderror
+                <input type="text" name="nama" value="{{ old('nama', auth()->user()->name) }}" readonly>
+              
+                    <span class="error-text">Pastikan nama lengkap Anda benar</span>
+               
             </div>
 
-            <div class="form-group">
+            <div class="form-group readonly">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}" required
-                    pattern="[a-zA-Z0-9._%+-]+@gmail\.com" title="Gunakan email @gmail.com saja">
-                @error('email')
-                    <span class="error-text">{{ $message }}</span>
-                @enderror
+                <input type="email" name="email" value="{{ old('email', auth()->user()->email) }}" readonly>
+
+                <span class="error-text">pastikan alamat email benar</span>
+              
             </div>
 
             <div class="form-group">

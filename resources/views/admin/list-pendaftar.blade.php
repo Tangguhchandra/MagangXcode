@@ -159,54 +159,6 @@
             
             <div class="modal-body">
                 <div id="modalContent">
-                    <div class="detail-item">
-                        <div class="detail-label">Nama:</div>
-                        <div class="detail-value">bambang</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Email:</div>
-                        <div class="detail-value">bambang@gmail.com</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Jenis Kelamin:</div>
-                        <div class="detail-value">Laki-laki</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Instansi:</div>
-                        <div class="detail-value">SMK TELKOM PURWOKERTO</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Divisi:</div>
-                        <div class="detail-value">Cyber Security Consultant</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Mulai Magang:</div>
-                        <div class="detail-value">2025-02-23</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Selesai Magang:</div>
-                        <div class="detail-value">2025-12-31</div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">CV:</div>
-                        <div class="detail-value">
-                            <a href="#" class="cv-link">Lihat CV</a>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <div class="detail-label">Status:</div>
-                        <div class="detail-value">
-                            <span class="status-badge status-diterima">diterima</span>
-                        </div>
-                    </div>
                 </div>
             </div>
             
@@ -263,6 +215,7 @@ fetch(`/admin/pendaftar/${id}/detail`)
  <div class="detail-label">Jenis Kelamin:</div>
  <div class="detail-value">${data.jenis_kelamin}</div>
  </div>
+
  
  <div class="detail-item">
  <div class="detail-label">Instansi:</div>
@@ -284,6 +237,17 @@ fetch(`/admin/pendaftar/${id}/detail`)
  <div class="detail-value">${data.selesai_magang}</div>
  </div>
  
+<div class="detail-item">
+    <div class="detail-label">Foto:</div>
+    <div class="detail-value">
+        ${
+            data.foto
+                ? `<a href="/storage/${data.foto}" target="_blank" class="cv-link">Lihat foto</a>`
+                : '-'
+        }
+    </div>
+</div>
+
  <div class="detail-item">
  <div class="detail-label">CV:</div>
  <div class="detail-value">
@@ -291,16 +255,19 @@ fetch(`/admin/pendaftar/${id}/detail`)
  </div>
  </div>`;
 
- // Tambahkan portofolio jika ada
- if (data.portofolio) {
- contentHTML += `
- <div class="detail-item">
- <div class="detail-label">Portofolio:</div>
- <div class="detail-value">
- <a href="/storage/${data.portofolio}" target="_blank" class="cv-link">Lihat</a>
- </div>
- </div>`;
- }
+ 
+contentHTML += `
+<div class="detail-item">
+  <div class="detail-label">Portofolio:</div>
+  <div class="detail-value">
+    ${
+      data.portofolio
+        ? `<a href="/storage/${data.portofolio}" target="_blank" class="cv-link">Lihat</a>`
+        : '-'
+    }
+  </div>
+</div>`;
+
 
  // Tambahkan status dengan badge styling
  const statusClass = getStatusClass(data.status);
@@ -337,37 +304,51 @@ function closeModal() {
  currentPendaftarId = null;
 }
 
+function showLoading() {
+    const popup = document.getElementById('loadingPopup');
+    if (popup) {
+        popup.style.display = 'flex'; // atau 'block', tergantung CSS kamu
+    }
+}
+
+function hideLoading() {
+    const popup = document.getElementById('loadingPopup');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
+
+
 function ubahStatus(status) {
-if (!currentPendaftarId) return;
-fetch(`/admin/update-status/${currentPendaftarId}`, {
- method: 'PATCH',
- headers: {
-'Content-Type': 'application/json',
-'Accept': 'application/json',
-'X-CSRF-TOKEN': '{{ csrf_token() }}' // untuk Laravel
- },
- body: JSON.stringify({ status })
- })
- .then(res => {
-if (!res.ok) throw new Error('Gagal update status');
-return res.json();
- })
- .then(data => {
- // Update status badge di modal
- const statusElement = document.querySelector('.status-badge');
- if (statusElement) {
- statusElement.textContent = status;
- statusElement.className = `status-badge ${getStatusClass(status)}`;
- }
- 
-alert('Status berhasil diperbarui!');
- location.reload(); // Refresh agar status di halaman ikut berubah
- })
- .catch(err => {
- console.error(err);
-alert('Terjadi kesalahan saat mengubah status.');
- });
- }
+    if (!currentPendaftarId) return;
+
+    showLoading(); // Tampilkan popup loading
+
+    fetch(`/admin/update-status/${currentPendaftarId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ status })
+    })
+    .then(res => {
+        if (!res.ok) throw new Error('Gagal update status');
+        return res.json(); // cukup 1x json()
+    })
+    .then(data => {
+       
+        location.reload(); // Reload halaman tanpa alert
+    })
+    .catch(err => {
+        
+        console.error(err);
+        alert('Terjadi kesalahan saat mengubah status.');
+    });
+}
+
+
 
 // Close modal when clicking outside
 window.onclick = function(event) {
@@ -396,6 +377,19 @@ document.addEventListener('keydown', function(event) {
   });
 
 </script>
+
+<!-- Popup Loading -->
+<div id="loadingPopup">
+                <div class="popup-box">
+                    <div class="spinner"></div>
+                    <p>Mengubah status...</p>
+                </div>
+                </div>
+
+
+
+
+
 
 </body>
 </html>

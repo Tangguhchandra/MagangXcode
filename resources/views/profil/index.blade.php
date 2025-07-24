@@ -127,6 +127,7 @@
                                 <p>
                                     <span class="badge badge-info">Belum Mendaftar</span>
                                 </p>
+                               
                             </div>
                             <div class="bio-item">
                                 <label>Member sejak</label>
@@ -140,10 +141,14 @@
                                 <label>Selesai magang</label>
                                 <p class="text-muted">Belum ada pendaftaran</p>
                             </div>
+                            <div>
+                                
+                            </div>
                         </div>
                     @endif
                 </div>
             </div>
+            <!-- Action Buttons -->
         </div>
 
     </div>

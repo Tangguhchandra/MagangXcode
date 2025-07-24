@@ -63,25 +63,18 @@ class AdminDashboardController extends Controller
                 }
             }
 
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Status berhasil diperbarui.'
-                ]);
-            }
+        return response()->json([
+            'success' => true,
+            'message' => 'Status berhasil diperbarui.'
+        ]);
 
-            return back()->with('success', 'Status berhasil diperbarui.');
         } catch (\Exception $e) {
             Log::error('Gagal update status: ' . $e->getMessage());
 
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Terjadi kesalahan saat mengubah status.'
-                ], 500);
-            }
-
-            return back()->with('error', 'Terjadi kesalahan saat mengubah status.');
+        return response()->json([
+            'success' => false,
+            'message' => 'Terjadi kesalahan saat mengubah status.'
+        ], 500);
         }
     }
 
