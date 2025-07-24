@@ -27,13 +27,16 @@
         <div class="profile-content">
             <!-- Left Section - Profile Info -->
             <div class="profile-card">
+                @foreach ($pendaftaran as $profilPendaftar )
+                    
+                @endforeach
                 <div class="profile-info">
                     <div class="profile-avatar">
                         <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=3b82f6&color=fff&rounded=true&size=200"
                             alt="Profile Picture">
                     </div>
-                    <h2 class="profile-name">{{ $user->name ? $user->name : 'Member' }}</h2>
-                    <p class="profile-role">{{ $user->email ? $user->email : 'example@gmail.com' }}</p>
+                    <h2 class="profile-name">{{ $profilPendaftar->nama ? $profilPendaftar->nama : 'Member' }}</h2>
+                    <p class="profile-role">{{ $profilPendaftar->email ? $profilPendaftar->email : 'example@gmail.com' }}</p>
                     <!-- Add badges based on user status -->
 
                 </div>
@@ -56,7 +59,7 @@
                                 <div class="bio-grid">
                                     <div class="bio-item">
                                         <label>Nama Lengkap</label>
-                                        <p>{{ $user->name ?? 'Belum diisi' }}</p>
+                                        <p>{{ $daftar->nama ?? 'Belum diisi' }}</p>
                                     </div>
                                     <div class="bio-item">
                                         <label>Email</label>
@@ -147,6 +150,7 @@
                         </div>
                     @endif
                 </div>
+                <a href="{{ route('profil.edit', $user->id) }}" class="btn btn-primary">Edit Profil</a>
             </div>
             <!-- Action Buttons -->
         </div>

@@ -22,6 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'DashboardUser'])->name('user.dashboard');
     Route::get('/pendaftaran', [PendaftaranController::class, 'create'])->name('pendaftaran.form');
     Route::post('/pendaftaranStore', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
+
+
+    // Profil Routes
+    Route::get('/profil/edit/{id}', [ProfilController::class, 'edit'])->name('profil.edit');
+    Route::patch('/profil/update/{id}', [ProfilController::class, 'update'])->name('profil.update');
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
 
     Route::post('/logout', function () {
