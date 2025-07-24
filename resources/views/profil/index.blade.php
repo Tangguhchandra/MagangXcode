@@ -64,7 +64,7 @@
                         <!-- User has registrations -->
                         @foreach ($pendaftaran as $index => $daftar)
                             @if ($index == 0)
-                                <!-- Show only the latest registration -->
+                                <!-- Show only the latest registration he -->
                                 <div class="bio-grid">
                                     <div class="bio-item">
                                         <label>Nama Lengkap</label>
