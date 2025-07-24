@@ -183,7 +183,7 @@
                                 <th>Nama</th>
                                 <th>Instansi</th>
                                 <th>CV</th>
-                                <th>portofolio
+                                <th>portofolio</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -200,23 +200,25 @@
                                     <td>
                                         @if ($item->portofolio)
                                             <a href="{{ asset('storage/' . $item->portofolio) }}" target="_blank">
-                                            📂 Lihat Portofolio
+                                                📂 Lihat Portofolio
                                             </a>
                                         @else
                                             <span style="color: gray;">Tidak ada portofolio</span>
-                                         @endif
+                                        @endif
                                     </td>
-                                    <form class="form-status" data-id="{{ $item->id }}">
-                                        @csrf
-                                        @method('PATCH')
-                                        <select name="status" onchange="submitStatusViaAjax(this)">
-                                            <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                            <option value="diterima" {{ $item->status == 'diterima' ? 'selected' : '' }}>Diterima</option>
-                                            <option value="ditolak" {{ $item->status == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
-                                        </select>
-                                    </form>
-                                </td>
+                                    <td>
+                                        <form class="form-status" data-id="{{ $item->id }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <select name="status" onchange="submitStatusViaAjax(this)">
+                                                <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                <option value="diterima" {{ $item->status == 'diterima' ? 'selected' : '' }}>Diterima</option>
+                                                <option value="ditolak" {{ $item->status == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                            </select>
+                                        </form>
+                                    </td>
                                 </tr>
+
                             @endforeach
                         </tbody>
                     </table>
