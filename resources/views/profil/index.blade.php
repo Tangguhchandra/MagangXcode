@@ -52,6 +52,7 @@
 
 
             <!-- Right Section - Bio & Details -->
+            @if (auth()->user()->role !== 'admin')
             <div class="bio-card" data-aos="fade-up">
                 <div class="bio-header">
                     <h3>Informasi saya</h3>
@@ -163,6 +164,7 @@
                         <a href="{{ route('profil.edit', $user->id) }}" class="btn btn-primary">Edit Profile</a>
                 @endif
             </div>
+            @endif
             <!-- Action Buttons -->
         </div>
 
