@@ -96,7 +96,7 @@
                         </label>
                     </form>
                 </div>
-                <div class="user"><a href="{{ route('profil') }}"><img src="{{ asset('assets/imgs/customer01.jpg') }}" alt="User" ></a></div>
+                <div class="user"><img src="{{ asset('/images/profil_admin.jpg') }}" alt="User"></div>
             </div>
 
             <!-- Cards -->
