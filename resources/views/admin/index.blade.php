@@ -96,7 +96,7 @@
                         </label>
                     </form>
                 </div>
-                <div class="user"><img src="{{ asset('assets/imgs/customer01.jpg') }}" alt="User"></div>
+                <div class="user"><a href="{{ route('profil') }}"><img src="{{ asset('assets/imgs/customer01.jpg') }}" alt="User" ></a></div>
             </div>
 
             <!-- Cards -->
@@ -378,11 +378,6 @@
 
 </script>
 
-<style>
-  * {
-    cursor: url('/images/cursor-keren.png') 0 0, auto !important;
-  }
-</style>
 
 
 </body>
