@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>List Pendaftar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/listpendaftar.css') }}">
     <style>
-        .status.delivered { background: #28a745; color: #fff; padding: 4px 8px; border-radius: 4px; }
-        .status.pending { background: #ffc107; color: #000; padding: 4px 8px; border-radius: 4px; }
-        .status.return { background: #dc3545; color: #fff; padding: 4px 8px; border-radius: 4px; }
+        .status.delivered {
+            background: #28a745;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .status.pending {
+            background: #ffc107;
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .status.return {
+            background: #dc3545;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
         .card-container::-webkit-scrollbar {
-        width: 8px;
-    }
+            width: 8px;
+        }
 
-    .card-container::-webkit-scrollbar-thumb {
-        background-color: rgba(0,0,0,0.2);
-        border-radius: 4px;
-    }
+        .card-container::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
 
-    .card-container {
-        scroll-behavior: smooth;
-    }
-
+        .card-container {
+            scroll-behavior: smooth;
+        }
     </style>
 
     <!-- Ionicons CDN -->
@@ -40,7 +58,7 @@
         <div class="navigation">
             <ul>
                 <li>
-                <a href="#">
+                    <a href="#">
                         <span class="icon">
                             <ion-icon name="caret-back-outline"></ion-icon>
                         </span>
@@ -63,9 +81,10 @@
                     </a>
                 </li>
 
-               
+
                 <li>
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="#"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -73,7 +92,7 @@
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
+                        @csrf
                     </form>
 
                 </li>
@@ -88,14 +107,8 @@
                 <div class="search">
                     <form id="searchForm" action="{{ route('admin.pendaftar') }}" method="GET">
                         <label>
-                            <input 
-                                type="text" 
-                                name="search" 
-                                id="searchInput"
-                                placeholder="Cari nama..." 
-                                value="{{ request('search') }}"
-                                autocomplete="off"
-                            >
+                            <input type="text" name="search" id="searchInput" placeholder="Cari nama..."
+                                value="{{ request('search') }}" autocomplete="off">
                             <ion-icon name="search-outline"></ion-icon>
                         </label>
                     </form>
@@ -104,103 +117,96 @@
             </div>
 
             <!-- CARD -->
-           <!-- Card Container -->
-<div class="card-container" style="max-height: 90vh; overflow-y: auto; margin-top: 10px;">
-    @foreach ($pendaftar as $item)
-        <div class="pendaftar-card" style="position: relative;">
+            <!-- Card Container -->
+            <div class="card-container" style="max-height: 90vh; overflow-y: auto; margin-top: 10px;">
+                @foreach ($pendaftar as $item)
+                    <div class="pendaftar-card" style="position: relative;">
 
-            <!-- Tombol Delete Icon -->
-            <form 
-                action="{{ route('pendaftar.destroy', $item->id) }}" 
-                method="POST" 
-                onsubmit="return confirm('Yakin ingin menghapus data ini?')"
-                style="position: absolute; top: 10px; right: 10px;">
-                
-                @csrf
-                @method('DELETE')
-                
-                <button 
-                    type="submit" 
-                    style="background: transparent; border: none; cursor: pointer;">
-                    <i class="fas fa-trash" style="color: #9d0000; font-size: 18px;"></i>
-                </button>
-            </form>
+                        <!-- Tombol Delete Icon -->
+                        <form action="{{ route('pendaftar.destroy', $item->id) }}" method="POST"
+                            onsubmit="return confirm('Yakin ingin menghapus data ini?')"
+                            style="position: absolute; top: 10px; right: 10px;">
 
-            <!-- Isi Card -->
-            <h3>{{ $item->nama }}</h3>
-            <p><strong>Instansi:</strong> {{ $item->instansi }}</p>
-            <p><strong>Email:</strong> {{ $item->email }}</p>
-            <p><strong>Status:</strong> 
-                <span class="status {{ $item->status ?? 'pending' }}">
-                    {{ ucfirst($item->status ?? 'pending') }}
-                </span>
-            </p>
-            <button 
-                type="button" 
-                class="btn-detail" 
-                data-id="{{ $item->id }}">
-                Detail
-            </button>
-        </div>
-    @endforeach
-    
-</div>
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" style="background: transparent; border: none; cursor: pointer;">
+                                <i class="fas fa-trash" style="color: #9d0000; font-size: 18px;"></i>
+                            </button>
+                        </form>
+
+                        <!-- Isi Card -->
+                        <h3>{{ $item->nama }}</h3>
+                        <p><strong>Instansi:</strong> {{ $item->instansi }}</p>
+                        <p><strong>Email:</strong> {{ $item->email }}</p>
+                        <p><strong>Status:</strong>
+                            <span class="status {{ $item->status ?? 'pending' }}">
+                                {{ ucfirst($item->status ?? 'pending') }}
+                            </span>
+                        </p>
+                        <button type="button" class="btn-detail" data-id="{{ $item->id }}">
+                            Detail
+                        </button>
+                    </div>
+                @endforeach
+
+            </div>
 
 
 
             <!-- Modal -->
-    <!-- Modal -->
-    <div id="detailModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Detail Pendaftar</h3>
-                <span class="close-btn" onclick="closeModal()">&times;</span>
-            </div>
-            
-            <div class="modal-body">
-                <div id="modalContent">
+            <!-- Modal -->
+            <div id="detailModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Detail Pendaftar</h3>
+                        <span class="close-btn" onclick="closeModal()">&times;</span>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="modalContent">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer" id="actionButtons">
+                        <button class="btn btn-success" onclick="ubahStatus('diterima')">
+                            Terima
+                        </button>
+                        <button class="btn btn-danger" onclick="ubahStatus('ditolak')">
+                            Tolak
+                        </button>
+                    </div>
                 </div>
             </div>
-            
-            <div class="modal-footer" id="actionButtons">
-                <button class="btn btn-success" onclick="ubahStatus('diterima')">
-                    Terima
-                </button>
-                <button class="btn btn-danger" onclick="ubahStatus('ditolak')">
-                    Tolak
-                </button>
-            </div>
-        </div>
-    </div>
 
         </div>
     </div>
 
     <!-- Scripts -->
     <script>
- document.querySelectorAll(".navigation li").forEach((item) => {
- item.addEventListener("mouseover", function () {
- document.querySelectorAll(".navigation li").forEach((el) => el.classList.remove("hovered"));
- this.classList.add("hovered");
- });
- });
-let toggle = document.querySelector(".toggle");
-let navigation = document.querySelector(".navigation");
-let main = document.querySelector(".main");
- toggle.onclick = function () {
- navigation.classList.toggle("active");
- main.classList.toggle("active");
- };
-let currentPendaftarId = null;
- document.querySelectorAll('.btn-detail').forEach(function(button) {
- button.addEventListener('click', function () {
-const id = this.getAttribute('data-id');
- currentPendaftarId = id;
-fetch(`/admin/pendaftar/${id}/detail`)
- .then(res => res.json())
- .then(data => {
- // Generate content dengan struktur yang rapi
- let contentHTML = `
+        document.querySelectorAll(".navigation li").forEach((item) => {
+            item.addEventListener("mouseover", function() {
+                document.querySelectorAll(".navigation li").forEach((el) => el.classList.remove("hovered"));
+                this.classList.add("hovered");
+            });
+        });
+        let toggle = document.querySelector(".toggle");
+        let navigation = document.querySelector(".navigation");
+        let main = document.querySelector(".main");
+        toggle.onclick = function() {
+            navigation.classList.toggle("active");
+            main.classList.toggle("active");
+        };
+        let currentPendaftarId = null;
+        document.querySelectorAll('.btn-detail').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                currentPendaftarId = id;
+                fetch(`/admin/pendaftar/${id}/detail`)
+                    .then(res => res.json())
+                    .then(data => {
+                        // Generate content dengan struktur yang rapi
+                        let contentHTML = `
  <div class="detail-item">
  <div class="detail-label">Nama:</div>
  <div class="detail-value">${data.nama}</div>
@@ -255,8 +261,8 @@ fetch(`/admin/pendaftar/${id}/detail`)
  </div>
  </div>`;
 
- 
-contentHTML += `
+
+                        contentHTML += `
 <div class="detail-item">
   <div class="detail-label">Portofolio:</div>
   <div class="detail-value">
@@ -269,9 +275,9 @@ contentHTML += `
 </div>`;
 
 
- // Tambahkan status dengan badge styling
- const statusClass = getStatusClass(data.status);
- contentHTML += `
+                        // Tambahkan status dengan badge styling
+                        const statusClass = getStatusClass(data.status);
+                        contentHTML += `
  <div class="detail-item">
  <div class="detail-label">Status:</div>
  <div class="detail-value">
@@ -279,112 +285,113 @@ contentHTML += `
  </div>
  </div>`;
 
- document.getElementById('modalContent').innerHTML = contentHTML;
- document.getElementById('actionButtons').style.display = 'block';
- document.getElementById('detailModal').style.display = 'flex';
- document.body.style.overflow = 'hidden';
- });
- });
- });
+                        document.getElementById('modalContent').innerHTML = contentHTML;
+                        document.getElementById('actionButtons').style.display = 'block';
+                        document.getElementById('detailModal').style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    });
+            });
+        });
 
-function getStatusClass(status) {
- switch(status.toLowerCase()) {
- case 'diterima':
- return 'status-diterima';
- case 'ditolak':
- return 'status-ditolak';
- default:
- return 'status-pending';
- }
-}
+        function getStatusClass(status) {
+            switch (status.toLowerCase()) {
+                case 'diterima':
+                    return 'status-diterima';
+                case 'ditolak':
+                    return 'status-ditolak';
+                default:
+                    return 'status-pending';
+            }
+        }
 
-function closeModal() {
- document.getElementById('detailModal').style.display = 'none';
- document.body.style.overflow = 'auto';
- currentPendaftarId = null;
-}
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentPendaftarId = null;
+        }
 
-function showLoading() {
-    const popup = document.getElementById('loadingPopup');
-    if (popup) {
-        popup.style.display = 'flex'; // atau 'block', tergantung CSS kamu
-    }
-}
+        function showLoading() {
+            const popup = document.getElementById('loadingPopup');
+            if (popup) {
+                popup.style.display = 'flex'; // atau 'block', tergantung CSS kamu
+            }
+        }
 
-function hideLoading() {
-    const popup = document.getElementById('loadingPopup');
-    if (popup) {
-        popup.style.display = 'none';
-    }
-}
-
-
-function ubahStatus(status) {
-    if (!currentPendaftarId) return;
-
-    showLoading(); // Tampilkan popup loading
-
-    fetch(`/admin/update-status/${currentPendaftarId}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({ status })
-    })
-    .then(res => {
-        if (!res.ok) throw new Error('Gagal update status');
-        return res.json(); // cukup 1x json()
-    })
-    .then(data => {
-       
-        location.reload(); // Reload halaman tanpa alert
-    })
-    .catch(err => {
-        
-        console.error(err);
-        alert('Terjadi kesalahan saat mengubah status.');
-    });
-}
+        function hideLoading() {
+            const popup = document.getElementById('loadingPopup');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+        }
 
 
+        function ubahStatus(status) {
+            if (!currentPendaftarId) return;
 
-// Close modal when clicking outside
-window.onclick = function(event) {
- const modal = document.getElementById('detailModal');
- if (event.target === modal) {
- closeModal();
- }
-}
+            showLoading(); // Tampilkan popup loading
 
-// Close modal with Escape key
-document.addEventListener('keydown', function(event) {
- if (event.key === 'Escape') {
- closeModal();
- }
-});
+            fetch(`/admin/update-status/${currentPendaftarId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        status
+                    })
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('Gagal update status');
+                    return res.json(); // cukup 1x json()
+                })
+                .then(data => {
 
-   const searchInput = document.getElementById('searchInput');
-  const searchForm = document.getElementById('searchForm');
-  let timer;
+                    location.reload(); // Reload halaman tanpa alert
+                })
+                .catch(err => {
 
-  searchInput.addEventListener('input', function () {
-    clearTimeout(timer); // Reset timer setiap kali user ngetik
-    timer = setTimeout(() => {
-      searchForm.submit(); // Submit otomatis setelah user berhenti ngetik 0.5 detik
-    }, 500); // 500ms jeda ketik
-  });
+                    console.error(err);
+                    alert('Terjadi kesalahan saat mengubah status.');
+                });
+        }
 
-</script>
 
-<!-- Popup Loading -->
-<div id="loadingPopup">
-                <div class="popup-box">
-                    <div class="spinner"></div>
-                    <p>Mengubah status...</p>
-                </div>
-                </div>
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        const searchForm = document.getElementById('searchForm');
+        let timer;
+
+        searchInput.addEventListener('input', function() {
+            clearTimeout(timer); // Reset timer setiap kali user ngetik
+            timer = setTimeout(() => {
+                searchForm.submit(); // Submit otomatis setelah user berhenti ngetik 0.5 detik
+            }, 500); // 500ms jeda ketik
+        });
+    </script>
+
+    <!-- Popup Loading -->
+    <div id="loadingPopup">
+        <div class="popup-box">
+            <div class="spinner"></div>
+            <p>Mengubah status...</p>
+        </div>
+    </div>
 
 
 
@@ -394,4 +401,5 @@ document.addEventListener('keydown', function(event) {
 
 
 </body>
+
 </html>

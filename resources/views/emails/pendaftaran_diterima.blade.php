@@ -89,6 +89,10 @@
             <a href="{{ url('/dashboard') }}" class="btn">Login ke Dashboard</a>
         </p>
 
+        <p style="text-align: center;">
+            <a href="{{ url('https://magang.xcode.co.id/') }}" class="btn">Login ke Logbook</a>
+        </p>
+
         <p>Terima kasih atas minat Anda untuk bergabung dengan kami. Kami berharap Anda akan mendapatkan pengalaman
             berharga selama magang di perusahaan kami.</p>
     </div>
