@@ -32,12 +32,18 @@
 
                     <div class="form-group"> 
                         <input type="email" class="form-input" id="email" name="email" placeholder="e-Mail" required>
+                        @error('email')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                         <small style="color: red; display: block; margin-top: 5px;">Gunakan email resmi!</small>
                     </div>
 
 
                     <div class="form-group password-group">
                         <input type="password" class="form-input" id="password" name="password" placeholder="Password" required>
+                        @error('password')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror   
                         <span class="password-toggle" onclick="togglePassword('password')">
                             <i class="fa-solid fa-eye"></i>
                         </span>

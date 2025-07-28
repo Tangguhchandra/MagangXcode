@@ -143,6 +143,13 @@ body {
     border-color: red !important;
 }
 
+.text-danger {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
 /* Floating label style */
 .form-label-floating {
     position: absolute;

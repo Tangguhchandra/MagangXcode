@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\AdminDashboardController;
+use Illuminate\Support\Facades\Mail;
 
 // Register & Login
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -48,5 +49,4 @@ Route::middleware('auth')->group(function () {
         Route::patch('/admin/update-status/{id}', [AdminDashboardController::class, 'updateStatus'])->name('admin.updateStatus');
         Route::delete('/pendaftar/{id}', [PendaftaranController::class, 'destroy'])->name('pendaftar.destroy');
     });
-
 });
