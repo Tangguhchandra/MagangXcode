@@ -14,14 +14,19 @@
     <div class="profile-container">
         <!-- Profile Header Section -->
         <div class="profile-header">
-            <div class="profile-title">
-                <h1>Profil</h1>
-                <p>Lihat detail Informasi pemagang</p>
-            </div>
-            <div class="header-status">
-                <span class="status-dot active"></span>
-            </div>
-        </div>
+    <div class="profile-title">
+        <h1>Profil</h1>
+        @if(auth()->user()->role === 'admin')
+            <p>Lihat detail informasi admin</p>
+        @else
+            <p>Lihat detail informasi pemagang</p>
+        @endif
+    </div>
+    <div class="header-status">
+        <span class="status-dot active"></span>
+    </div>
+</div>
+
 
         <!-- Main Profile Content -->
         <div class="profile-content">
