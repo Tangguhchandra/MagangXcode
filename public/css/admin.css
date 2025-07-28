@@ -34,13 +34,12 @@ body {
     height: 100%;
     background-color: #a60000;
     background-size: cover;
-    border-left: 10px solid var(--black1);
     transition: 0.5s;
     overflow: hidden;
 }
 
 .navigation.active {
-    width: 80px;
+    width: 70px;
 }
 
 .navigation ul {
