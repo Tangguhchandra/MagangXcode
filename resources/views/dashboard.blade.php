@@ -286,47 +286,6 @@
 </script>
 
 
-<!-- Tambahkan di bagian bawah HTML sebelum `</body>` -->
-<script>
-  const canvas = document.getElementById('waveCanvas');
-  const ctx = canvas.getContext('2d');
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = 200;
-  }
-
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
-  let t = 0;
-
-  function drawWave() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.beginPath();
-    ctx.moveTo(0, 100);
-
-    for (let x = 0; x <= canvas.width; x++) {
-    const y = 10 * Math.sin((x + t) * 0.02) + 20 * Math.cos((x + t) * 0.005) + 110;
-    ctx.lineTo(x, y);
-    }
-    ctx.lineTo(canvas.width, canvas.height);
-    ctx.lineTo(0, canvas.height);
-    ctx.closePath();
-
-    ctx.fillStyle = 'rgba(255, 255, 255, 1)'; // bisa diganti biru kalau mau
-    ctx.fill();
-
-    t += 1.5;
-
-    requestAnimationFrame(drawWave);
-  }
-
-  drawWave();
-</script>
-
-
 
 
 

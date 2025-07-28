@@ -113,7 +113,7 @@
                         </label>
                     </form>
                 </div>
-                <div class="user"><img src="{{ asset('assets/imgs/customer01.jpg') }}" alt="User"></div>
+                <div class="user"><img src="{{ asset('/images/profile.png') }}" alt="User"></div>
             </div>
 
             <!-- CARD -->
