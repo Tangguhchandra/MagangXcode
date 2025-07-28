@@ -390,11 +390,7 @@ document.addEventListener('keydown', function(event) {
 
 
 
-<style>
-  * {
-    cursor: url('/images/cursor-keren.png') 0 0, auto !important;
-  }
-</style>
+
 
 
 </body>
