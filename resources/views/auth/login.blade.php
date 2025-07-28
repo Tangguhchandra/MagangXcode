@@ -40,7 +40,7 @@
 
                     @if ($errors->any())
                         <div style="color: red; font-size: 14px; margin-bottom: 10px;">
-                            {{ $errors->first() }}
+                            {{ $errors->first()}}
                         </div>
                     @endif
 

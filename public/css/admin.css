@@ -524,6 +524,12 @@ th {
     .cardBox {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .table-wrapper {
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden; /* Hanya scroll horizontal */
+    }
 }
 
 @media (max-width: 768px) {
@@ -535,6 +541,11 @@ th {
     }
     .status.inProgress {
         white-space: nowrap;
+    }
+    .table-wrapper {
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden; /* Hanya scroll horizontal */
     }
 }
 
@@ -568,6 +579,50 @@ th {
         position: fixed;
         right: 0;
         left: initial;
+    }
+
+    .table-wrapper {
+        max-width: 75%;
+        overflow-x: auto;
+        overflow-y: auto; /* Hanya scroll horizontal */
+    }
+}
+
+
+@media (max-width: 375px){
+    .navigation ul li a .icon {
+        min-width: 50px;
+    }
+    .navigation ul li a .title {
+        display: none;
+    }
+    .navigation.active ul li a .title {
+        display: block;
+    }
+    .navigation.active ul li a .icon {
+        min-width: 60px;
+    }
+    .table-wrapper {
+        max-width: 55%;
+        overflow-x: auto;
+        overflow-y: auto; /* Hanya scroll horizontal */
+    }
+}
+
+@media (max-width: 360px) {
+    .navigation ul li a .title {
+        display: none;
+    }
+    .navigation.active ul li a .title {
+        display: block;
+    }
+    .navigation.active ul li a .icon {
+        min-width: 40px;
+    }
+    .table-wrapper {
+        max-width: 55%;
+        overflow-x: auto;
+        overflow-y: auto; /* Hanya scroll horizontal */
     }
 }
 
