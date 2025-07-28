@@ -84,7 +84,7 @@ input[type="file"] {
 }
 
 .action-buttons .btn {
-    background-color: #2563eb;
+    background-color: #dc3545;
     color: white;
     padding: 14px 30px;
     border: none;
@@ -96,7 +96,7 @@ input[type="file"] {
 }
 
 .action-buttons .btn:hover {
-    background-color: #1e3a8a;
+    background-color: #c62c3c;
 }
 
 /* === Error Message === */
