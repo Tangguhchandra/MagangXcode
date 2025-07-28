@@ -503,7 +503,7 @@ th {
 }
 
 /* ====================== Responsive Design ========================== */
-@media (max-width: 991px) {
+@media (max-width: 1024px) {
     .navigation {
         left: -300px;
     }
@@ -516,7 +516,8 @@ th {
         left: 0;
     }
     .main.active {
-        left: 300px;
+        left: 300px; /* atau 250px sesuai lebar sidebar */
+        width: calc(100% - 300px);
     }
     .cardBox {
         grid-template-columns: repeat(2, 1fr);
