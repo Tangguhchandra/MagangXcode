@@ -43,6 +43,7 @@ class MailMassage extends Notification
                     ->line('Selamat! Pendaftaran magang Anda telah diterima.')
                     ->line('Silakan hubungi kami untuk informasi lebih lanjut.')
                     ->action('Login ke Dashboard', url('/dashboard'))
+                    ->line('Link daftar logbook: https://magang.xcode.co.id/')
                     ->line('Terima kasih telah mendaftar!');
     }
 
