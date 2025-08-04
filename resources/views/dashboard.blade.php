@@ -57,7 +57,7 @@
                     <div class="desc-section">
                         <p>Tunjukkan kemampuan logikamu dengan membangun aplikasi dan sistem yang bermanfaat. Divisi
                             Programming akan membimbingmu mengembangkan software dari nol, mulai dari backend, frontend,
-                            hingga pemrograman berbasis objek.</p>
+                            hingga pemrograman b    erbasis objek.</p>
                     </div>
                 </div>
 
