@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pendaftaran;
 use App\Mail\PendaftaranDiterima;
+use App\Mail\PendaftaranDitolak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
@@ -57,24 +58,32 @@ class AdminDashboardController extends Controller
             if ($request->status === 'diterima') {
                 try {
                     Mail::to($pendaftar->email)->send(new PendaftaranDiterima($pendaftar));
-                    Log::info('Email berhasil dikirim ke: ' . $pendaftar->email);
+                    Log::info('Email penerimaan berhasil dikirim ke: ' . $pendaftar->email);
                 } catch (\Exception $e) {
-                    Log::error('Gagal mengirim email: ' . $e->getMessage());
+                    Log::error('Gagal mengirim email penerimaan: ' . $e->getMessage());
+                }
+            } elseif ($request->status === 'ditolak') {
+                try {
+                    Mail::to($pendaftar->email)->send(new PendaftaranDitolak($pendaftar));
+                    Log::info('Email penolakan berhasil dikirim ke: ' . $pendaftar->email);
+                } catch (\Exception $e) {
+                    Log::error('Gagal mengirim email penolakan: ' . $e->getMessage());
                 }
             }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Status berhasil diperbarui.'
-        ]);
 
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Status berhasil diperbarui.'
+            ]);
         } catch (\Exception $e) {
             Log::error('Gagal update status: ' . $e->getMessage());
 
-        return response()->json([
-            'success' => false,
-            'message' => 'Terjadi kesalahan saat mengubah status.'
-        ], 500);
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat mengubah status.'
+            ], 500);
         }
     }
 
