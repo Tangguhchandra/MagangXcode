@@ -167,7 +167,14 @@ class AdminDashboardController extends Controller
             }
 
             
-            $user->forceDelete();
+            $pendaftaran->forceDelete();
+
+            if ($user) {
+                // Hapus user jika tidak ada pendaftaran lain yang terkait
+                if ($user->pendaftaran()->count() === 0) {
+                    $user->forceDelete();
+                }
+            }
 
             return redirect()->back()->with('success', 'Data pendaftar berhasil dihapus secara permanen.');
         } catch (\Exception $e) {
