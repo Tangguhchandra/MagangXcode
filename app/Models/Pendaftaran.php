@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 
 class Pendaftaran extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes, Notifiable;
 
     // Kolom-kolom yang boleh diisi (mass assignable)
     protected $fillable = [
@@ -18,14 +19,13 @@ class Pendaftaran extends Model
         'jenis_kelamin',
         'instansi',
         'divisi',
+        'durasi_magang',
         'mulai_magang',
         'selesai_magang',
         'foto',
         'cv',
         'portofolio',
         'status',
-        'mulai_magang', // Tanggal mulai magang
-        'selesai_magang', // Tanggal selesai magang
     ];
 
     // (Opsional) Relasi ke User

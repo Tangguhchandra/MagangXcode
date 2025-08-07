@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Pendaftaran;
 use App\Mail\PendaftaranDiterima;
+use App\Mail\PendaftaranDitolak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class AdminDashboardController extends Controller
 {
@@ -57,24 +59,32 @@ class AdminDashboardController extends Controller
             if ($request->status === 'diterima') {
                 try {
                     Mail::to($pendaftar->email)->send(new PendaftaranDiterima($pendaftar));
-                    Log::info('Email berhasil dikirim ke: ' . $pendaftar->email);
+                    Log::info('Email penerimaan berhasil dikirim ke: ' . $pendaftar->email);
                 } catch (\Exception $e) {
-                    Log::error('Gagal mengirim email: ' . $e->getMessage());
+                    Log::error('Gagal mengirim email penerimaan: ' . $e->getMessage());
+                }
+            } elseif ($request->status === 'ditolak') {
+                try {
+                    Mail::to($pendaftar->email)->send(new PendaftaranDitolak($pendaftar));
+                    Log::info('Email penolakan berhasil dikirim ke: ' . $pendaftar->email);
+                } catch (\Exception $e) {
+                    Log::error('Gagal mengirim email penolakan: ' . $e->getMessage());
                 }
             }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Status berhasil diperbarui.'
-        ]);
 
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Status berhasil diperbarui.'
+            ]);
         } catch (\Exception $e) {
             Log::error('Gagal update status: ' . $e->getMessage());
 
-        return response()->json([
-            'success' => false,
-            'message' => 'Terjadi kesalahan saat mengubah status.'
-        ], 500);
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat mengubah status.'
+            ], 500);
         }
     }
 
@@ -101,6 +111,129 @@ class AdminDashboardController extends Controller
     public function showDetail($id)
     {
         $pendaftar = Pendaftaran::findOrFail($id);
+
+        // Debug untuk memeriksa path file
+        Log::info('CV Path: ' . $pendaftar->cv);
+        Log::info('Full CV URL: ' . asset('storage/' . $pendaftar->cv));
+
         return response()->json($pendaftar);
+    }
+
+
+    public function trash()
+    {
+        try {
+            $pendaftarans = Pendaftaran::onlyTrashed()->get();
+            // dd($pendaftarans);
+            return view('admin.trash', compact(var_name: 'pendaftarans'));
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([
+                'error' => 'Gagal mengambil data: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+
+    public function restore($id)
+    {
+        try {
+            $pendaftaran = Pendaftaran::withTrashed()->findOrFail($id);
+            $pendaftaran->restore();
+
+            return redirect()->back()->with('success', 'Data pendaftar berhasil dipulihkan.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([
+                'error' => 'Gagal memulihkan data: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+
+    public function deletePermanent($id)
+    {
+        try {
+            $pendaftaran = Pendaftaran::withTrashed()->findOrFail($id);
+
+            $user = $pendaftaran->user;
+            // Hapus file fisik jika ada
+            if ($pendaftaran->foto && Storage::disk('public')->exists($pendaftaran->foto)) {
+                Storage::disk('public')->delete($pendaftaran->foto);
+            }
+            if ($pendaftaran->cv && Storage::disk('public')->exists($pendaftaran->cv)) {
+                Storage::disk('public')->delete($pendaftaran->cv);
+            }
+            if ($pendaftaran->portofolio && Storage::disk('public')->exists($pendaftaran->portofolio)) {
+                Storage::disk('public')->delete($pendaftaran->portofolio);
+            }
+
+            
+            $user->forceDelete();
+
+            return redirect()->back()->with('success', 'Data pendaftar berhasil dihapus secara permanen.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([
+                'error' => 'Gagal menghapus data secara permanen: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * Menampilkan daftar user untuk management
+     */
+    public function userManagement(Request $request)
+    {
+        $search = $request->input('search');
+
+        $users = \App\Models\User::query()
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->get();
+
+        return view('admin.user-management', compact('users'));
+    }
+
+    /**
+     * Soft delete user
+     */
+    public function deleteUser($id)
+    {
+        try {
+            $user = \App\Models\User::findOrFail($id);
+
+            // Soft delete semua pendaftaran yang terkait dengan user
+            $user->pendaftaran()->delete();
+
+            // Soft delete user
+            $user->delete();
+
+            return redirect()->back()->with('success', 'User berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([
+                'error' => 'Gagal menghapus user: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * Restore user yang sudah dihapus
+     */
+    public function restoreUser($id)
+    {
+        try {
+            $user = \App\Models\User::withTrashed()->findOrFail($id);
+            $user->restore();
+
+            // Restore juga pendaftaran yang terkait
+            $user->pendaftaran()->restore();
+
+            return redirect()->back()->with('success', 'User berhasil dipulihkan.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([
+                'error' => 'Gagal memulihkan user: ' . $e->getMessage()
+            ]);
+        }
     }
 }
