@@ -12,6 +12,7 @@
     @if ($role === 'admin')
         <li><a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a></li>
         <li><a href="{{ route('admin.pendaftar') }}" class="{{ request()->routeIs('admin.pendaftar') ? 'active' : '' }}">List Pendaftar</a></li>
+        <li><a href="{{ route('admin.history') }}" class="{{ request()->routeIs('admin.trash') ? 'active' : '' }}">History Pendaftar</a></li>
     @else
         <li><a href="{{ route('user.dashboard') }}" class="{{ request()->routeIs('user.dashboard') || request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
         <li><a href="/dashboard#tentang" class="{{ request()->is('*tentang*') ? 'active' : '' }}">Tentang</a></li>

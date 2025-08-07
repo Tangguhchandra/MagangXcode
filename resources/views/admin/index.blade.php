@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <style>
@@ -60,6 +58,13 @@
                     <a href="{{ route('admin.pendaftar') }}">
                         <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
                         <span class="title">List Pendaftar</span>
+                    </a>
+                </li>
+
+                <li class="{{ request()->is('admin/trash') ? 'active' : '' }}">
+                    <a href="{{ route('admin.trash') }}">
+                        <span class="icon"><ion-icon name="trash-outline"></ion-icon></span>
+                        <span class="title">History Pendaftar</span>
                     </a>
                 </li>
 

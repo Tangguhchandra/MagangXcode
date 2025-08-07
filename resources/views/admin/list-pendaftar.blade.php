@@ -81,6 +81,13 @@
                     </a>
                 </li>
 
+                <li class="{{ request()->is('admin/trash') ? 'active' : '' }}">
+                    <a href="{{ route('admin.trash') }}">
+                        <span class="icon"><ion-icon name="trash-outline"></ion-icon></span>
+                        <span class="title">History Pendaftar</span>
+                    </a>
+                </li>
+
 
                 <li>
                     <a href="#"
@@ -126,10 +133,8 @@
                         <form action="{{ route('pendaftar.destroy', $item->id) }}" method="POST"
                             onsubmit="return confirm('Yakin ingin menghapus data ini?')"
                             style="position: absolute; top: 10px; right: 10px;">
-
                             @csrf
                             @method('DELETE')
-
                             <button type="submit" style="background: transparent; border: none; cursor: pointer;">
                                 <i class="fas fa-trash" style="color: #9d0000; font-size: 18px;"></i>
                             </button>
