@@ -60,16 +60,10 @@ class PendaftaranController extends Controller
         try {
             $pendaftaran = Pendaftaran::findOrFail($id);
 
-            // Ambil user yang terkait
-            $user = $pendaftaran->user;
-
-            // Hapus pendaftaran dulu
+            // Hanya hapus pendaftaran menggunakan soft delete
+            // User tidak ikut dihapus untuk menjaga referential integrity
             $pendaftaran->delete();
 
-            // Hapus user jika ada
-            if ($user) {
-                $user->delete(); // atau $user->forceDelete() jika pakai softDeletes
-            }
             return redirect()->back()->with('success', 'Data pendaftar berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors([

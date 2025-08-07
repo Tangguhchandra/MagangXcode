@@ -14,7 +14,7 @@ return new class extends Migration
     });
 
     Schema::table('users', function (Blueprint $table) {
-        $table->enum('role', ['pemagang', 'admin'])->default('pemagang');
+        $table->enum('role', allowed: ['pemagang', 'admin'])->default('pemagang');
     });
 }
 
