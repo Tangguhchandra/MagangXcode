@@ -20,7 +20,7 @@ class AdminDashboardController extends Controller
         $query = Pendaftaran::query();
 
         if ($request->has('search') && $request->search != '') {
-            $query->where('nama', 'like', '%' . $request->search . '%');
+            $query->where('nama', 'ilike', '%' . $request->search . '%');
         }
 
         $pendaftar = $query->get();
@@ -93,11 +93,12 @@ class AdminDashboardController extends Controller
      */
     public function listPendaftar(Request $request)
     {
+        
         $search = $request->input('search');
-
+        
         $pendaftar = Pendaftaran::query()
             ->when($search, function ($query, $search) {
-                $query->where('nama', 'like', "%{$search}%");
+                $query->where('nama', 'ilike', "%{$search}%");
             })
             ->latest()
             ->get();
@@ -120,18 +121,26 @@ class AdminDashboardController extends Controller
     }
 
 
-    public function trash()
-    {
-        try {
-            $pendaftarans = Pendaftaran::onlyTrashed()->get();
-            // dd($pendaftarans);
-            return view('admin.trash', compact(var_name: 'pendaftarans'));
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors([
-                'error' => 'Gagal mengambil data: ' . $e->getMessage()
-            ]);
-        }
+    public function trash(Request $request)
+{
+    try {
+        $search = $request->input('search');
+
+        $pendaftarans = Pendaftaran::onlyTrashed()
+            ->when($search, function ($query, $search) {
+                // Gunakan 'ilike' agar case-insensitive di PostgreSQL
+                $query->where('nama', 'ilike', "%{$search}%");
+            })
+            ->get();
+
+        return view('admin.trash', compact('pendaftarans'));
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors([
+            'error' => 'Gagal mengambil data: ' . $e->getMessage()
+        ]);
     }
+}
+
 
 
     public function restore($id)
@@ -193,8 +202,8 @@ class AdminDashboardController extends Controller
 
         $users = \App\Models\User::query()
             ->when($search, function ($query, $search) {
-                $query->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
+                $query->where('name', 'ilike', "%{$search}%")
+                    ->orWhere('email', 'ilike', "%{$search}%");
             })
             ->latest()
             ->get();
