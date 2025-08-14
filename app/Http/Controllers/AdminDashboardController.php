@@ -8,6 +8,7 @@ use App\Mail\PendaftaranDitolak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Storage;
 
 class AdminDashboardController extends Controller
@@ -56,10 +57,27 @@ class AdminDashboardController extends Controller
             $pendaftar->status = $request->status;
             $pendaftar->save();
 
+            $key = 'send-email:' . $pendaftar->email; // key unik per user
+            $limit = 2;  // max email
+            $decay = 600; // 10 menit
+
             if ($request->status === 'diterima') {
                 try {
-                    Mail::to($pendaftar->email)->send(new PendaftaranDiterima($pendaftar));
-                    Log::info('Email penerimaan berhasil dikirim ke: ' . $pendaftar->email);
+                    if (! RateLimiter::tooManyAttempts($key, $limit)) {
+                        Mail::to($pendaftar->email)
+                            ->send(new PendaftaranDiterima($pendaftar));
+                        Log::info('Email penerimaan berhasil dikirim ke: ' . $pendaftar->email);
+                        RateLimiter::hit($key, $decay);
+                    }
+
+                    else{
+                        Log::warning('Terlalu banyak upaya pengiriman email ke: ' . $pendaftar->email);
+                        return back()->withErrors([
+                            'email' => 'Terlalu banyak upaya pengiriman email. Silakan coba lagi nanti.'
+                        ]);
+                    }
+
+
                 } catch (\Exception $e) {
                     Log::error('Gagal mengirim email penerimaan: ' . $e->getMessage());
                 }
@@ -93,9 +111,9 @@ class AdminDashboardController extends Controller
      */
     public function listPendaftar(Request $request)
     {
-        
+
         $search = $request->input('search');
-        
+
         $pendaftar = Pendaftaran::query()
             ->when($search, function ($query, $search) {
                 $query->where('nama', 'ilike', "%{$search}%");
@@ -122,24 +140,24 @@ class AdminDashboardController extends Controller
 
 
     public function trash(Request $request)
-{
-    try {
-        $search = $request->input('search');
+    {
+        try {
+            $search = $request->input('search');
 
-        $pendaftarans = Pendaftaran::onlyTrashed()
-            ->when($search, function ($query, $search) {
-                // Gunakan 'ilike' agar case-insensitive di PostgreSQL
-                $query->where('nama', 'ilike', "%{$search}%");
-            })
-            ->get();
+            $pendaftarans = Pendaftaran::onlyTrashed()
+                ->when($search, function ($query, $search) {
+                    // Gunakan 'ilike' agar case-insensitive di PostgreSQL
+                    $query->where('nama', 'ilike', "%{$search}%");
+                })
+                ->get();
 
-        return view('admin.trash', compact('pendaftarans'));
-    } catch (\Exception $e) {
-        return redirect()->back()->withErrors([
-            'error' => 'Gagal mengambil data: ' . $e->getMessage()
-        ]);
+            return view('admin.trash', compact('pendaftarans'));
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([
+                'error' => 'Gagal mengambil data: ' . $e->getMessage()
+            ]);
+        }
     }
-}
 
 
 
@@ -175,7 +193,7 @@ class AdminDashboardController extends Controller
                 Storage::disk('public')->delete($pendaftaran->portofolio);
             }
 
-            
+
             $pendaftaran->forceDelete();
 
             if ($user) {
