@@ -3,16 +3,14 @@
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
 <section class="hero">
     <div class="hero-content">
         <h1 id="typing-text">Raih Pengalaman Magang Terbaik, Hello <strong>Admin</strong></h1>
         <p>Bergabunglah dengan kami untuk mengembangkan diri di dunia profesional.</p>
         <a href="{{ route('pendaftaran.form') }}" class="cta-button">Isi Form Sekarang</a>
     </div>
-
-    
-    <!-- Wave Animasi -->
-<canvas id="waveCanvas"></canvas>
 
 
 
@@ -39,7 +37,7 @@
                 <div class="swiper-slide program-slide">
                     <div class="image-section">
                         <h3>Cyber Security</h3>
-                        <img src="{{ asset('images/program1.png') }}" alt="Program 1" style="width: 220px;">
+                        <img src="{{ asset('images/program1.png') }}" alt="Program 1" style="width: 200px;">
                     </div>
                     <div class="desc-section">
                         <p>Jadilah garda terdepan dalam melindungi sistem digital. Di divisi Cyber Security, kamu akan
@@ -52,7 +50,7 @@
                 <div class="swiper-slide program-slide">
                     <div class="image-section">
                         <h3>Programming</h3>
-                        <img src="{{ asset('images/program2.png') }}" alt="Program 2" style="width: 220px;">
+                        <img src="{{ asset('images/program2.png') }}" alt="Program 2" style="width: 200px;">
                     </div>
                     <div class="desc-section">
                         <p>Tunjukkan kemampuan logikamu dengan membangun aplikasi dan sistem yang bermanfaat. Divisi
@@ -65,7 +63,7 @@
                 <div class="swiper-slide program-slide">
                     <div class="image-section">
                         <h3>Public Relation</h3>
-                        <img src="{{ asset('images/program3.png') }}" alt="Program 3" style="width: 220px;">
+                        <img src="{{ asset('images/program3.png') }}" alt="Program 3" style="width: 200px;">
                     </div>
                     <div class="desc-section">
                         <p>Asah kemampuan komunikasi dan branding-mu. Di divisi Public Relation, kamu akan belajar membuat
@@ -77,7 +75,7 @@
                 <div class="swiper-slide program-slide">
                     <div class="image-section">
                         <h3>Designing</h3>
-                        <img src="{{ asset('images/program4.png') }}" alt="Program 4" style="width: 220px;">
+                        <img src="{{ asset('images/program4.png') }}" alt="Program 4" style="width: 200px;">
                     </div>
                     <div class="desc-section">
                         <p>Buat tampilan yang memukau dan user-friendly. Divisi Designer akan mengasah skill-mu dalam desain
@@ -89,7 +87,7 @@
                 <div class="swiper-slide program-slide">
                     <div class="image-section">
                         <h3>IT Network & Hardware</h3>
-                        <img src="{{ asset('images/program5.png') }}" alt="Program 5" style="width: 220px;">
+                        <img src="{{ asset('images/program5.png') }}" alt="Program 5" style="width: 200px;">
                     </div>
                     <div class="desc-section">
                         <p>Kenali lebih dalam dunia perangkat keras dan jaringan. Di divisi ini, kamu akan belajar mengelola
@@ -101,7 +99,7 @@
                 <div class="swiper-slide program-slide">
                     <div class="image-section">
                         <h3>Network Engineering</h3>
-                        <img src="{{ asset('images/program6.png') }}" alt="Program 6" style="width: 220px;">
+                        <img src="{{ asset('images/program6.png') }}" alt="Program 6" style="width: 200px;">
                     </div>
                     <div class="desc-section">
                         <p>Bangun dan kelola infrastruktur jaringan yang andal. Divisi Network Engineer akan membekalimu

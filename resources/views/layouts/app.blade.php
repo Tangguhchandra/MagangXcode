@@ -56,17 +56,6 @@
         --swiper-theme-color: #e63946;
     }
 
-    .swiper-button-next,
-    .swiper-button-prev {
-        color: #e63946 !important;
-    }
-
-    .swiper-pagination-bullet-active {
-        background-color: #e63946 !important;
-    }
-
-
-
     </style>
 
 </head>
