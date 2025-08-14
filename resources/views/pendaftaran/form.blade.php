@@ -38,7 +38,7 @@
         .form-container {
             animation: fadeInUp 1.2s ease-in-out;
             backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.85);
+            background: white;
         }
 
         .btn-submit {

@@ -145,7 +145,7 @@ button[type="submit"]:hover,
     align-items: center;
     gap: 8px;
 
-    background: linear-gradient(135deg, #ff4b5c, #e63946);
+    background: linear-gradient(135deg, #ff2d42, #eb2334);
     color: #fff;
     padding: 12px 24px;
     border-radius: 9px; /* SUPER ROUND */
@@ -168,7 +168,7 @@ button[type="submit"]:hover,
 .btn-back:hover {
     transform: translateY(35px) scale(1.05);
     box-shadow: 0 10px 24px rgba(230, 57, 70, 0.5);
-    background: linear-gradient(135deg, #e63946, #ff4b5c);
+    background: linear-gradient(135deg, #f22132, #e6172c);
 }
 
 /* Tambahkan animasi saat muncul */

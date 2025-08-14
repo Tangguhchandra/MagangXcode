@@ -1,130 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>List Pendaftar</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('css/listpendaftar.css') }}">
-    <style>
-        .status.delivered {
-            background: #28a745;
-            color: #fff;
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-
-        .status.pending {
-            background: #ffc107;
-            color: #000;
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-
-        .status.return {
-            background: #dc3545;
-            color: #fff;
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-
-        .card-container::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .card-container::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-        }
-
-        .card-container {
-            scroll-behavior: smooth;
-        }
-    </style>
-
-    <!-- Ionicons CDN -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
-</head>
-
-<body>
-    <!-- =============== Navigation ================ -->
-    <div class="container">
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="caret-back-outline"></ion-icon>
-                        </span>
-                        <span class="title">XcodeAdmin</span>
-                    </a>
-                </li>
-
-                <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">
-                    <a href="{{ route('admin.dashboard') }}">
-                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
-
-                <!-- List Pendaftar -->
-                <li class="{{ request()->is('admin/pendaftar*') ? 'active' : '' }}">
-                    <a href="{{ route('admin.pendaftar') }}">
-                        <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-                        <span class="title">List Pendaftar</span>
-                    </a>
-                </li>
-
-                <li class="{{ request()->is('admin/trash') ? 'active' : '' }}">
-                    <a href="{{ route('admin.trash') }}">
-                        <span class="icon"><ion-icon name="trash-outline"></ion-icon></span>
-                        <span class="title">History Pendaftar</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="#"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                        <span class="title">Sign Out</span>
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-
-                </li>
-            </ul>
-        </div>
-
-        <!-- Main content -->
-        <div class="main">
-            <!-- Topbar -->
-            <div class="topbar">
-                <div class="toggle"><ion-icon name="menu-outline"></ion-icon></div>
-                <div class="search">
-                    <form id="searchForm" action="{{ route('admin.pendaftar') }}" method="GET">
-                        <label>
-                            <input type="text" name="search" id="searchInput" placeholder="Cari nama..."
-                                value="{{ request('search') }}" autocomplete="off">
-                            <ion-icon name="search-outline"></ion-icon>
-                        </label>
-                    </form>
-                </div>
-                <div class="user"><img src="{{ asset('/images/profile.png') }}" alt="User"></div>
-            </div>
-
-            <!-- CARD -->
-            <!-- Card Container -->
+@extends('layouts.admin')
+@section('title', 'List Pendaftar')
+@section('content')
             <div class="card-container" style="max-height: 90vh; overflow-y: auto; margin-top: 10px;">
                 @foreach ($pendaftar as $item)
                     <div class="pendaftar-card" style="position: relative;">
@@ -378,16 +254,6 @@
             }
         });
 
-        const searchInput = document.getElementById('searchInput');
-        const searchForm = document.getElementById('searchForm');
-        let timer;
-
-        searchInput.addEventListener('input', function() {
-            clearTimeout(timer); // Reset timer setiap kali user ngetik
-            timer = setTimeout(() => {
-                searchForm.submit(); // Submit otomatis setelah user berhenti ngetik 0.5 detik
-            }, 500); // 500ms jeda ketik
-        });
     </script>
 
     <!-- Popup Loading -->
@@ -397,14 +263,4 @@
             <p>Mengubah status...</p>
         </div>
     </div>
-
-
-
-
-
-
-
-
-</body>
-
-</html>
+@endsection
