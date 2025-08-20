@@ -94,13 +94,13 @@
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->instansi }}</td>
                                 <td>
-                                    <a href="{{ asset('storage/' . $item->cv) }}" target="_blank">
+                                    <a href="{{ Storage::url($item->cv) }}" target="_blank">
                                         📄 Lihat CV
                                     </a>
                                 </td>
                                 <td>
                                     @if ($item->portofolio)
-                                        <a href="{{ asset('storage/' . $item->portofolio) }}" target="_blank">
+                                        <a href="{{ Storage::url($item->portofolio) }}" target="_blank">
                                             📂 Lihat Portofolio
                                         </a>
                                     @else
@@ -224,7 +224,7 @@
                     @foreach ($recent as $item)
                         <tr>
                             <td width="60px">
-                                <div class="imgBx"><img src="{{ asset('storage/' . $item->foto) }}" alt="img"></div>
+                                <div class="imgBx"><img src="{{ Storage::url($item->foto) }}" alt="img"></div>
                             </td>
                             <td>
                                 <h4>{{ $item->nama }}<br><span>{{ $item->divisi }}</span></h4>

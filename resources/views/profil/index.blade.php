@@ -39,7 +39,7 @@
 
         <div class="profile-info">
             <div class="profile-avatar">
-                <img src="{{ asset('storage/' . $profilPendaftar->foto) }}" alt="img">
+                <img src="{{ Storage::url($profilPendaftar->foto) }}" alt="img">
             </div>
             <h2 class="profile-name">{{ $profilPendaftar->nama ?? 'Member' }}</h2>
             <p class="profile-role">{{ $profilPendaftar->email ?? 'example@gmail.com' }}</p>
