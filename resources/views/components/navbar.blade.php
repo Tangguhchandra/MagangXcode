@@ -30,7 +30,7 @@
         </a>
 
         <!-- Logout -->
-        <form action="{{ route('logout') }}" method="POST" class="logout-form">
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="logout-form">
             @csrf
             <button type="submit" class="logout-btn" title="Logout">
                 <i class="fas fa-sign-out-alt fa-lg"></i>
@@ -57,11 +57,11 @@
         <li><a href="#kontak">Kontak</a></li>
     @endif
     <li><a href="{{ route('profil') }}">Profil</a></li>
-    <li>
-        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-          Logout
-        </a>
-    </li>
+        <li>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+        </li>
 </ul>
 
   </div>
